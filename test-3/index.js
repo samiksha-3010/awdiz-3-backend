@@ -31,13 +31,56 @@ app.post("/register",async function (req, res) {
     age,
     password,
     confirmpassword,
+
 })
-
-
 
   await user.save()
-  res.send("registration")
+  res.send("registration done")
 })
+ app.get("/find", async(req,res)=> {
+    const { name } = req.body;
+    if(!name) return res.send("name is required")
+
+    const user = await User.find({name:name}). select ("-password")
+    console.log(  user,"users list here")
+    if(user.length){
+        return res.send(user)
+    }
+    return res.send("No User found.")
+
+ })
+
+ app.patch("/update/:id", async(req, res)=>{
+    const { age, number} = req.body;
+    const{ id } = req.params
+
+    if(!id) return res.send ("id is required")
+    if(!id) return res.send ("id is required")
+    if(!id) return res.send ("id is required")
+
+    const  updateUser = updateUser (id, { age, number }, ).select("-password")
+    return res.json({ message: "Data updated...", data: updateUser })
+
+ })
+
+ app.delete("/delete", async function (req,res){
+const { id } = req.query;
+if(!id) return res.send("Id is required..")
+
+const deletedUser = await User.findByIdAndDelete(id)
+return res.json({massage: "User deleted", data: deletedUser})
+ })
+
+
+
+
+
+
+
+
+
+
+
 
 
 
