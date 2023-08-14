@@ -89,8 +89,6 @@ mongoose.connect(process.env.MONGO_URL).then(() => {
     console.log("Connected to DB..")
 })
 
-
-
 app.listen(8000, () => {
     console.log("Listening on port 8000");
 })
