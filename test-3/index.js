@@ -1,4 +1,5 @@
 import express from 'express';
+
 import mongoose from 'mongoose';
 import dotenv from 'dotenv';
 import User from "./modal/user.modal.js"
@@ -9,12 +10,14 @@ const app = express();
 dotenv.config();
 app.use(express.json())
 
+
 app.get("/", function (req, res) {
     res.send("Working...")
 })
 app.post("/login", function (req, res) {
     res.send("login from login function")
 })
+
 app.post("/register",async function (req, res) {
   const { name,surname,age,password,confirmpassword,email}=req.body
   if(!name)return res.send("name is missing")
@@ -34,6 +37,7 @@ app.post("/register",async function (req, res) {
 
 })
 
+  
   await user.save()
   res.send("registration done")
 })
@@ -62,7 +66,7 @@ app.post("/register",async function (req, res) {
     return res.json({ message: "Data updated...", data: updateUser })
 
  })
-
+  
  app.delete("/delete", async function (req,res){
 const { id } = req.query;
 if(!id) return res.send("Id is required..")
@@ -70,18 +74,6 @@ if(!id) return res.send("Id is required..")
 const deletedUser = await User.findByIdAndDelete(id)
 return res.json({massage: "User deleted", data: deletedUser})
  })
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 
