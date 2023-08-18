@@ -1,4 +1,5 @@
 import ProductModal from "./../modal/Product.Modal.js";
+import jwt from "jsonwebtoken";
 
 export const addProduct = async (req, res) => {
     try {
@@ -6,9 +7,12 @@ export const addProduct = async (req, res) => {
         if (!name || !price || !image || !category || !token) return res.status(404).json({ status: "error", message: "All fields are mandtory.." })
 
 
+        console.log(name, price, image, category,token);
+        const product = new ProductModal({ name, price, image, category, userId: userId  });
 
-        const product = new ProductModal({ name, price, image, category });
-        const decodedData = jwt.verify(token, process.env.JWT_SECRET)
+
+        const decodedData = jwt.verify(token, process.env.JWT_SECRET);
+        
 
         if (!decodedData) {
             return res.status(404).json({ status: "error", message: "Token not valid." })
@@ -16,7 +20,7 @@ export const addProduct = async (req, res) => {
 
         const userId = decodedData.userId;
 
-        const Product = new ProductModal({ name, price, image, category });
+        const Product = new ProductModal({ name, price, image, category, userId: userId });
         await product.save();
 
         return res.status(201).json({ status: "Sucess" })
@@ -55,6 +59,8 @@ export const getYourProducts = async (req, res) => {
         const userId = decodedData.userId;
 
         const yourProducts = await ProductModal.find({ userId: userId })
+
+        console.log( )
 
         if (yourProducts.length) {
             return res.status(200).json({ status: "success", products: yourProducts })
