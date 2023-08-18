@@ -17,7 +17,13 @@ const userSchema = new Schema({
         type: String,
         enum: ["Buyer", "Seller", "Admin"],
         default: "Buyer"
-    }
+    },
+
+    // userId: {
+    //     type: mongoose.Schema.Types.ObjectId,
+    //     ref: 'User'
+    // }
+
 })
 
 export default Mongoose.model("User",userSchema);
