@@ -20,7 +20,8 @@ const productSchema = new Schema({
     userId: {
         type: mongoose.Schema.Types.ObjectId,
         ref: 'User'
-    }
+    },
+    
 })
 
 export default mongoose.model("Product", productSchema)

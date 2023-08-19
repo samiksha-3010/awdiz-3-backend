@@ -75,10 +75,6 @@ export const getYourProducts = async (req, res) => {
 }
 
 
-
-
-
-
 export const updateYourProduct = async (req, res) => {
     try {
         const { productId, name, image, price, category, token } = req.body;
@@ -103,3 +99,36 @@ export const updateYourProduct = async (req, res) => {
         return res.status(500).json({ status: "error", error: error.message })
     }
 }
+
+
+
+export const deleteYourProduct = async (req,res) =>{
+    try{
+        const {productId,token} = req.body;
+        if(!productId) return res. status(404).json({ status: "error", message: "Product is mandtory."})
+        const decodedData = jwt.verify(token, process.env.JWT_SECRET)
+    const userId = decodedData.userId;
+    const isDeleted = await ProductModal.findOneAndDelete({_id:productId,userId:userId})
+     
+    if(isDeleted){
+        return res.status(200).json({ succecc: true, message: "Product Deleted Successfuly."})
+
+    }
+    throw new error ("Mongodb error")
+
+    }catch (error){
+        return res .status(500).json({status: "error", error: error.message})
+    }
+    }
+
+
+
+
+
+
+
+
+
+
+
+

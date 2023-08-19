@@ -18,11 +18,14 @@ const userSchema = new Schema({
         enum: ["Buyer", "Seller", "Admin"],
         default: "Buyer"
     },
+    cart: {
+        type: [String]
+    },
+    wishlist: {
+        type: [String]
+    }
 
-    // userId: {
-    //     type: mongoose.Schema.Types.ObjectId,
-    //     ref: 'User'
-    // }
+  
 
 })
 
