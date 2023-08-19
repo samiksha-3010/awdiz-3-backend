@@ -7,8 +7,8 @@ export const addProduct = async (req, res) => {
         if (!name || !price || !image || !category || !token) return res.status(404).json({ status: "error", message: "All fields are mandtory.." })
 
 
-        console.log(name, price, image, category,token);
-        const product = new ProductModal({ name, price, image, category, userId: userId  });
+        // console.log(name, price, image, category,token);
+        // const product = new ProductModal({ name, price, image, category, userId: userId  });
 
 
         const decodedData = jwt.verify(token, process.env.JWT_SECRET);
@@ -20,7 +20,7 @@ export const addProduct = async (req, res) => {
 
         const userId = decodedData.userId;
 
-        const Product = new ProductModal({ name, price, image, category, userId: userId });
+        const product = new ProductModal({ name, price, image, category, userId: userId });
         await product.save();
 
         return res.status(201).json({ status: "Sucess" })
@@ -34,6 +34,7 @@ export const addProduct = async (req, res) => {
 
 export const allProducts = async (req, res) => {
     try {
+        
         const products = await ProductModal.find({});
         if (products.length) {
             return res.status(200).json({ status: "Success", products: products })
@@ -55,12 +56,12 @@ export const getYourProducts = async (req, res) => {
         if (!decodedData) {
             return res.status(404).json({ status: "error", message: "Token not valid." })
         }
-
+4
         const userId = decodedData.userId;
 
         const yourProducts = await ProductModal.find({ userId: userId })
 
-        console.log( )
+        // console.log( )
 
         if (yourProducts.length) {
             return res.status(200).json({ status: "success", products: yourProducts })
