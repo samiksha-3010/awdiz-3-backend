@@ -4,7 +4,7 @@ import mongoose from "mongoose"
 import { Login, Register,getCurrentUser } from "./controllers/User.Controllers.js";
 import{ addProduct, allProducts, deleteYourProduct, getYourProducts, updateYourProduct} from './controllers/product.Controolers.js'
 import { checkSeller } from "./Meedleware/SelllerMeedleware.js";
-import { addCart, addWishlist, getCartProducts, getWishlistProducts, removeCartProduct } from "./controllers/Buyer.Controolers.js";
+import { addCart, addWishlist, getCartProducts, getWishlistProducts} from "./controllers/Buyer.Controolers.js";
 
 
 const app = express();
@@ -35,7 +35,7 @@ app.post("/add-product", checkSeller, addProduct)
 app.get("/get-your-products", checkSeller, getYourProducts)
 app.patch("/update-your-product",checkSeller, updateYourProduct )
 app.delete("/delete-your-product",checkSeller,deleteYourProduct)
-app.delete("/remove-cart-product",checkSeller,removeCartProduct)
+// app.delete("/remove-cart-product",checkSeller,removeCartProduct)
 
 
 
