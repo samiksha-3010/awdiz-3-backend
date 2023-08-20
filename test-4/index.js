@@ -38,11 +38,6 @@ app.delete("/delete-your-product",checkSeller,deleteYourProduct)
 // app.delete("/remove-cart-product",checkSeller,removeCartProduct)
 
 
-
-
-
-
-
 mongoose.connect(process.env.Mongo_URL).then(() =>{
     console.log("connected to DB..")
 })
