@@ -1,5 +1,6 @@
 import ProductModal from "./../modal/Product.Modal.js";
 import jwt from "jsonwebtoken";
+import User from "./../modal/User.js";
 
 export const addProduct = async (req, res) => {
     try {
@@ -123,6 +124,48 @@ export const deleteYourProduct = async (req, res) => {
     }
 }
 
+
+export const addRating = async (req, res) => {
+    try {
+        const { productId, rating } = req.body;
+
+        const updatedProductRating = await ProductModal.findByIdAndUpdate(productId, { $push: { ratings: rating } }, { new: true })
+
+        if (updateYourProduct) {
+            return res.status(200).json({ success: true, message: "Rating added Successfully", product: updatedProductRating })
+        }
+        throw new Error("Mongodb error")
+    } catch (error) {
+        return res.status(500).json({ status: "error", error: error.message })
+    }
+}
+
+export const addComments = async (req,res) =>{
+    try{
+        const {productId,token, comments} = req.body;
+
+        const decodedData=jwt.verify(token,process.env.JWT_SECRET)
+        if(!decodedData){
+            return res.status(404).json({status:"error",message:"Token not valid"})
+
+        }
+
+        const userId = decodedData.userId
+        const user = await User.findById(userId)
+           
+        const updatedProductComents = await ProductModal.findByIdAndUpdate(productId, { $push: { Comments: {Comments:comments,name:user.name} } }, { new: true })
+
+        if(updatedProductComents) {
+            return res.status(200).json({success:true,message:"Comment Add Successfully...", product:updatedProductComents})
+        }
+       
+        throw new Error("MongoDb Error")
+
+    }catch (error) {
+        return res.status(500).json({ status: "error", error: error.message })
+
+}
+}
 
 
 

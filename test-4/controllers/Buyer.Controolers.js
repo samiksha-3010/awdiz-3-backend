@@ -5,12 +5,12 @@ import jwt from "jsonwebtoken";
 export const addCart = async (req, res) => {
     try {
         const { token, productId } = req.body;
-        if (!token || !productId) throw new Error("Token and Product id is required.")
+        if (!token || !productId) throw new Error("Token and product id is requir.")
 
         const decodedData = jwt.verify(token, process.env.JWT_SECRET);
         const userId = decodedData?.userId;
 
-        const user = await UserModal.findById({ _id: userId })
+        const user = await User.findById({ _id: userId })
 
         user?.cart.push(productId);
 
@@ -19,7 +19,7 @@ export const addCart = async (req, res) => {
         return res.status(200).json({ success: true, user: user })
 
     } catch (error) {
-        return res.status(500).json({ status: "error", message: error })
+        return res.status(500).json({ status: "error", message: error.message })
     }
 }
 export const getCartProducts = async (req, res) => {
@@ -29,7 +29,7 @@ export const getCartProducts = async (req, res) => {
         const decodedData = jwt.verify(token, process.env.JWT_SECRET);
         const userId = decodedData?.userId;
 
-        const user = await UserModal.findById(userId)
+        const user = await User.findById(userId)
 
 
         if (user) {
@@ -54,12 +54,12 @@ export const getCartProducts = async (req, res) => {
 export const addWishlist = async (req, res) => {
     try {
         const { token, productId } = req.body;
-        if (!token || !productId) throw new Error("Token and Product id is required.")
+        if (!token || !productId) throw new Error("Token and product id is requir.")
 
         const decodedData = jwt.verify(token, process.env.JWT_SECRET);
         const userId = decodedData?.userId;
 
-        const user = await UserModal.findById({ _id: userId })
+        const user = await User.findById({ _id: userId })
 
         user?.wishlist.push(productId);
 
@@ -81,7 +81,7 @@ export const getWishlistProducts = async (req, res) => {
         const decodedData = jwt.verify(token, process.env.JWT_SECRET);
         const userId = decodedData?.userId;
 
-        const user = await UserModal.findById(userId)
+        const user = await User.findById(userId)
         if (user) {
             var finalData = [];
             for (var i = 0; i < user.wishlist.length; i++) {

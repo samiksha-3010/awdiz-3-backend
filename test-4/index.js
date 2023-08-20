@@ -2,9 +2,11 @@ import express  from "express"
 import dotenv from "dotenv"
 import mongoose from "mongoose"
 import { Login, Register,getCurrentUser } from "./controllers/User.Controllers.js";
-import{ addProduct, allProducts, deleteYourProduct, getYourProducts, updateYourProduct} from './controllers/product.Controolers.js'
-import { checkSeller } from "./Meedleware/SelllerMeedleware.js";
+import{ addComments, addProduct, addRating, allProducts, deleteYourProduct, getYourProducts, updateYourProduct} from './controllers/product.Controolers.js'
+import { checkSeller, isAdmin, isValidUser } from "./Meedleware/All.Meedleware.js";
 import { addCart, addWishlist, getCartProducts, getWishlistProducts} from "./controllers/Buyer.Controolers.js";
+import { blockProduct, blockUser, getAllBuyers, getAllProducts, getAllSellers, unBlockUser, unblockProduct, verifyProduct } from "./controllers/Admin.Controolers.js";
+
 
 
 const app = express();
@@ -26,6 +28,9 @@ app.post("/add-cart",addCart)
 app.get("/get-cart-products", getCartProducts)
 app.post("/add-wishlist",addWishlist)
 app.get("/get-Wishlist-products",getWishlistProducts)
+app.patch('/add-rating',isValidUser, addRating)
+app.patch('/add-comments',isValidUser, addComments)// - assignemnt - {userId comment}
+
 
 
  
@@ -36,6 +41,23 @@ app.get("/get-your-products", checkSeller, getYourProducts)
 app.patch("/update-your-product",checkSeller, updateYourProduct )
 app.delete("/delete-your-product",checkSeller,deleteYourProduct)
 // app.delete("/remove-cart-product",checkSeller,removeCartProduct)
+
+//admin
+
+app.get('/get-all-buyers', isAdmin, getAllBuyers) // UserModel.find({role : "Buyer"}) - assignemnt
+app.get('/get-all-sellers', isAdmin, getAllSellers)// UserModel.find({role : "Seller"}) - assignemnt
+app.get("/get-all-products", isAdmin, getAllProducts) // ProductModel.find({}) 
+
+app.patch("/block-user",isAdmin,blockUser)
+app.patch("/unblock-user", isAdmin, unBlockUser)
+app.patch("/block-product",isAdmin, blockProduct)
+app.patch("/unblock-product",isAdmin, unblockProduct)
+app.patch("/verify-product",isAdmin, verifyProduct)
+
+// app.patch("/get-verify-product", isAdmin, getverifiedProducts) - assignemnt
+// app.patch("/get-un-verify-product", isAdmin, getUnVerifiedProducts) - assignemnt
+// app.patch("/get-blocked-product", isAdmin, getBlockedProducts) - assignemnt
+
 
 
 mongoose.connect(process.env.Mongo_URL).then(() =>{
