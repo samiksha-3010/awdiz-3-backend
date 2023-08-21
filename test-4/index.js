@@ -32,8 +32,6 @@ app.patch('/add-rating',isValidUser, addRating)
 app.patch('/add-comments',isValidUser, addComments)// - assignemnt - {userId comment}
 
 
-
- 
 //Seller
 
 app.post("/add-product", checkSeller, addProduct)
@@ -57,7 +55,7 @@ app.patch("/verify-product",isAdmin, verifyProduct)
 app.patch("/get-verify-product", isAdmin, getverifiedProducts) -
 app.patch("/get-un-verify-product", isAdmin, getUnVerifiedProducts) -
 app.patch("/get-blocked-product", isAdmin, getBlockedProducts) 
-// app.patch("/get-all-product", isAdmin, getallverifyProducts) -
+// app.patch("/get-all-product", isAdmin, getallverifyProducts) 
 
 
 mongoose.connect(process.env.Mongo_URL).then(() =>{
