@@ -203,11 +203,63 @@ export const getAllProducts =async (req,res) =>{
         return res.status(200).json({ status: "success", products: yourProducts })
     }
 
-    return res.status(404).json({ status: "error", message: "No products found." })
+    return res.status(404).json({ status: "error", message: "No products found." })  
+}
 
-  
+
+// *************************verify **********************
+
+
+
+
+
+     export const  getverifiedProducts= async (req,res)=>{
+        try{ 
+        const {productId} = req.body
+        const product = await ProductModal .findByIdAndUpdate(productId, {verified:true }, {new: true})
+        if(product){
+            res.status(200).json({ success:true,message:"verified succesfully", product:product})
+        }
+                return res.status(404).json({ status: "error", message: "get Verifie admin"})
+    } catch(error){
+        return res.status(500).json({status:"error",message: error.message})
+    }
+     } 
+
+
+export const getUnVerifiedProducts =async (req,res) =>{
+    try{ 
+        const {productId} = req.body
+        const product = await ProductModal .findByIdAndUpdate(productId, {verified:true }, {new: true})
+        if(product){
+            res.status(200).json({ success:true,message:"admin has unaccpect verified succesfully", product:product})
+
+        }
+                return res.status(404).json({ status: "error", message: error.message })
+
+                throw new Error("Enternal error please try ")
+
+    } catch(error){
+        return res.status(500).json({status:"error",message: error.message})
+    }
     
 }
+
+export const  getBlockedProducts =async (req,res) =>{
+    try{
+    const getBlockedProducts = await ProductModal.find({verified:true})
+    if(getBlockedProducts.length){
+        res.status(200).json({ success:true,message, products:getBlockedProducts})
+    }
+    throw new Error( {success : false,message:"no Block product"})
+
+    }catch(error){
+        return res.status(500).json({status:"error",message: error.message})
+    }  
+}
+
+
+
 
 
 

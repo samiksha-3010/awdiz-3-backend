@@ -100,15 +100,28 @@ export const getWishlistProducts = async (req, res) => {
     }
 }
 
-// export const removeCartProduct = (req, res)=>{
-//     try{          
-//         const {token, product} = req.body;
-//         const decodedData = jwt.verify(token, process.env.JWT_SECRET);
-//         const userId = decodedData?.userId;
-//         const await
+export  const removeCartProduct  = async (req, res) =>{
+    try{
 
-//     }
-// }
+        const {productId,token} = req.body;
+        if(!productId || !token)  throw new Error("Product Id and token Mendtory")
+
+        const decodedData = jwt.verify(token,process.env.JWT_SECRET);
+        const userId = decodedData.userId;
+
+        const user= await  User.findById({_id:userId})
+        const cart = user?.cart
+
+        const  removeCartProductProductId = cart.indexOf(productId)
+        cart.splice( removeCartProductProductId, 1)
+
+        await user.save()
+        return res.status(200).json({success: true, user: User })
+    }catch (error) {
+    
+            return res.status(500).json({status:error, message: error.message})
+        }
+ }
 
 
 
