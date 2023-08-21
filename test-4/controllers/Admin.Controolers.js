@@ -218,6 +218,7 @@ export const getAllProducts =async (req,res) =>{
         const {productId} = req.body
         const product = await ProductModal .findByIdAndUpdate(productId, {verified:true }, {new: true})
         if(product){
+            
             res.status(200).json({ success:true,message:"verified succesfully", product:product})
         }
                 return res.status(404).json({ status: "error", message: "get Verifie admin"})
