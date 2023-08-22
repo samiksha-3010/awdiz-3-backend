@@ -22,7 +22,6 @@ export const checkSeller = async (req, res, next) => {
         }
 
         next();
-
     } catch (error) {
         return res.status(500).json({ error: error.message, status: "error" })
     }

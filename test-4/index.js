@@ -17,6 +17,8 @@ app.get("/",(req,res) => {
   res.send("working..")
 })
 
+
+
 //All
 app.post("/register", Register)
 app.post("/login", Login)

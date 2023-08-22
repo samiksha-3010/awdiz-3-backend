@@ -19,6 +19,7 @@ export const blockUser = async (req, res) => {
     }
 }
 
+
 export const unBlockUser = async (req, res) => {
     try {
         const { userId } = req.body;
@@ -101,9 +102,6 @@ next();
 return res.status(500).json({ error: error.message, status: "error" })
 }
 }
-
-
-
 export const verifyProduct = async (req, res) => {
     try {
         const { productId } = req.body;
@@ -119,7 +117,6 @@ export const verifyProduct = async (req, res) => {
         return res.status(500).json({ success: false, message: error })
     }
 }
-
 // *******************************
 
 
@@ -135,7 +132,7 @@ export const getAllBuyers = async (req,res) =>{
         if (!decodedData) {
             return res.status(404).json({ status: "error", message: "Token not valid." })
         }
-4
+// 4
         const userId = decodedData.userId;
 
         const yourProducts = await User.find({ role:"Buyer" })
@@ -213,49 +210,71 @@ export const getAllProducts =async (req,res) =>{
 
 
 
-     export const  getverifiedProducts= async (req,res)=>{
-        try{ 
-        const {productId} = req.body
-        const product = await ProductModal .findByIdAndUpdate(productId, {verified:true }, {new: true})
-        if(product){
-            
-            res.status(200).json({ success:true,message:"verified succesfully", product:product})
+export const getverifiedProducts  =async (res,req)=>{
+    try{
+        const verifiedProducts = await ProductModal.find({isVerified: true})
+        if(!verifiedProducts.length) {
+          return  res.status(404).json({success:false,message:"No Verified Products"})
         }
-                return res.status(404).json({ status: "error", message: "get Verifie admin"})
-    } catch(error){
-        return res.status(500).json({status:"error",message: error.message})
+    }catch (error){
+        res.status(500).json({success: false,message:error})
     }
-     } 
-
-
-export const getUnVerifiedProducts =async (req,res) =>{
-    try{ 
-        const {productId} = req.body
-        const product = await ProductModal .findByIdAndUpdate(productId, {verified:true }, {new: true})
-        if(product){
-            res.status(200).json({ success:true,message:"admin has unaccpect verified succesfully", product:product})
-
-        }
-                return res.status(404).json({ status: "error", message: error.message })
-
-                throw new Error("Enternal error please try ")
-
-    } catch(error){
-        return res.status(500).json({status:"error",message: error.message})
-    }
-    
 }
+    
+
+    export const getUnVerifiedProducts  =async (res,req)=>{
+        try{
+            const unverifiedProducts = await ProductModal.find({isVerified: false})
+            if(!unverifiedProducts.length) {
+              return  res.status(404).json({success:false,message:"No unVerified Products..."})
+            }
+
+            return res.status(200).json({ success: "true", product:unverifiedProducts})
+
+        }catch (error){
+            res.status(500).json({success: false,message:error})
+        }
+    }
+
+
+
+
+
+
+
+
+
+// export const getUnVerifiedProducts =async (req,res) =>{
+//     try{ 
+//         const {productId} = req.body
+//         const product = await ProductModal .findByIdAndUpdate(productId, {verified:true }, {new: true})
+//         if(product){
+//             res.status(200).json({ success:true,message:"admin has unaccpect verified succesfully", product:product})
+
+//         }
+//                 return res.status(404).json({ status: "error", message: error.message })
+
+//                 // throw new Error("Enternal error please try ")
+
+//     } catch(error){
+//         return res.status(500).json({status:"error",message: error.message})
+//     }
+    
+// }
 
 export const  getBlockedProducts =async (req,res) =>{
     try{
-    const getBlockedProducts = await ProductModal.find({verified:true})
-    if(getBlockedProducts.length){
-        res.status(200).json({ success:true,message, products:getBlockedProducts})
+    const blockedProducts = await ProductModal.find({isBlocked:true})
+    if(!blockedProducts.length){
+        res.status(200).json({ success:false,message:"No Unblocked Product.."})
     }
-    throw new Error( {success : false,message:"no Block product"})
+
+    return res.status(200).json({ success: "true", product:blockedProducts})
+
+   
 
     }catch(error){
-        return res.status(500).json({status:"error",message: error.message})
+        return res.status(500).json({success:"false",message: error})
     }  
 }
 
