@@ -102,6 +102,8 @@ next();
 return res.status(500).json({ error: error.message, status: "error" })
 }
 }
+
+
 export const verifyProduct = async (req, res) => {
     try {
         const { productId } = req.body;
@@ -203,12 +205,7 @@ export const getAllProducts =async (req,res) =>{
     return res.status(404).json({ status: "error", message: "No products found." })  
 }
 
-
 // *************************verify **********************
-
-
-
-
 
 export const getverifiedProducts  =async (res,req)=>{
     try{
@@ -226,7 +223,7 @@ export const getverifiedProducts  =async (res,req)=>{
         try{
             const unverifiedProducts = await ProductModal.find({isVerified: false})
             if(!unverifiedProducts.length) {
-              return  res.status(404).json({success:false,message:"No unVerified Products..."})
+              return res.status(404).json({success:false,message:"No unVerified Products..."})
             }
 
             return res.status(200).json({ success: "true", product:unverifiedProducts})

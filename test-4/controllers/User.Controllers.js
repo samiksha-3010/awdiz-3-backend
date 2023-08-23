@@ -4,21 +4,23 @@ import jwt from "jsonwebtoken";
 
 export const Register = async (req, res) => {
   try {
-    const { name, email, password, role } = req.body;
+    const { userData } = req.body;
+    const { name, email, password, role } = userData;
+
+
     if (!name || !email || !password || !role)
       return res.json({
-        status: "error",
+        success : false ,
         message: "All fields are mandtory.."
       });
 
     const isEmailExist = await User.find({ email: email });
     if (isEmailExist.length) {
       return res.json({
-        status: "error",
+       success : false,
         message: "Email is exist, try diffrent email."
       });
     }
-
     const hashedPassword = await bcrypt.hash(password, 10);
 
     const user = new User({ name, email, password: hashedPassword, role });
@@ -26,26 +28,28 @@ export const Register = async (req, res) => {
     await user.save();
 
     return res.json({
-      status: "Success",
+      success: true,
+      // status: "Success",
       message: "User registered Successfully.",
     });
   } catch (error) {
-    return res.json({ status: "error", message: error.message });
+    return res.json({ success: false, message: error })
+    // return res.json({ status: "error", message: error.message });
   }
 };
 
 export const Login = async (req, res) => {
   try {
-    const { email, password } = req.body;
+    const { email, password } = req.body.userData;
     if (!email || !password)
       return res.json({
-        status: "error",
+        success : false,
         message: "All fields are mandtory..",
       });
 
     const user = await User.findOne({ email: email });
     if (!user)
-      return res.json({ status: "error", message: "User not found.." });
+      return res.json({ success : false, message: "User not found.." });
 
     const isPasswordRight = await bcrypt.compare(password, user.password);
     // console.log(isPasswordRight, "isPasswordRight");
@@ -58,15 +62,15 @@ export const Login = async (req, res) => {
       const token = jwt.sign({ userId: user._id }, process.env.JWT_SECRET);
       // console.log(token, "token her");
       return res.json({
-        status: "Success",
+        success : true,
         message: "Login Successfull.",
         user: userObeject,
         token: token,
       });
     }
-    return res.json({ status: "error", message: "Password is wrong." });
+    return res.json({ success : false, message: "Password is wrong." });
   } catch (error) {
-    return res.json({ status: "error", message: "error" });
+    return res.json({ success : false, message: "error" });
   }
 };
 
