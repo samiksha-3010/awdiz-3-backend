@@ -13,11 +13,13 @@ function reducer(state, action) {
           };
          
         case "logout":
-            return { user: null,token:null } // re - assign
+            return {  currentuser: null,token:null } // re - assign
         default:
             return state;
     }
 }
+
+
 const AuthProvider = ({ children }) => {
     const [state, dispatch] = useReducer(reducer, initialState);
 
@@ -26,28 +28,28 @@ const AuthProvider = ({ children }) => {
         localStorage.setItem("UserData", JSON.stringify("userData"))
         localStorage.setItem("UserToken", JSON.stringify("token"))
 
-        dispatch({
-            type: 'login',
-            payload: userData,
-            token:token,
-        })
+       
     }
 
     const logout = () => {
+        localStorage.removeItem("userToken");
+        localStorage.removeItem("userData");
      
-        dispatch({ type: 'logout'})
-        localStorage.setItem("UserData", JSON.stringify("userData"))
-        localStorage.setItem("UserToken", JSON.stringify("token"))
-    }
+        dispatch
+         ({ type: 'logout',})
+    };
 
-    // useEffect(() => {
-    //     if (isUserPresent) {
-    //         dispatch({
-    //             type: 'login',
-    //             payload: isUserPresent
-    //         })
-    //     }
-    // }, [])
+    useEffect(() => {
+
+        const getToken = JSON.parse(localStorage.getItem("userToken"));
+    const userData = JSON.parse(localStorage.getItem("userData"));
+            dispatch({
+                type: 'login',
+                token:getToken,
+                payload: userData
+            })
+        
+    }, [])
 
     return (
         <AuthContext.Provider value={{ state, login, logout }} >

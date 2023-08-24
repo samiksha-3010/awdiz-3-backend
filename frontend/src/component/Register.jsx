@@ -18,9 +18,10 @@ const Register = () => {
 
     const handleSubmit = async (event) => {
         event.preventDefault();
+        
         if (userData.name && userData.email && userData.password && userData.confirmPassword && userData.role) {
             if (userData.password === userData.confirmPassword) {
-                const response = await axios.post("http://localhost:8000/register", { userData });
+                const response = await axios.post("http://localhost:8000/register", {userData});
                 if (response.data.success) {
 
                     setUserData({ name: "", email: "", password: "", confirmPassword: "", role: "Buyer" })
@@ -31,10 +32,10 @@ const Register = () => {
                 }
 
             } else {
-                toast.error("Password and Confirm Password not Matched.")
+                toast.error("Password and confirm password not matched...")
             }
         } else {
-            toast.error("All fields are mandtory.")
+            toast.error("All field are mandtory...")
         }
     }
     // console.log(userData, "userData")
