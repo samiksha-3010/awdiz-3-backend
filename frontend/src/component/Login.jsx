@@ -1,4 +1,4 @@
-import React, { useContext, useState } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import { toast } from 'react-hot-toast'
 import axios from 'axios'
 import { useNavigate } from 'react-router-dom'
@@ -21,15 +21,22 @@ const Login = () => {
         if (userData.email && userData.password) {
             const response = await axios.post("http://localhost:8000/login", { userData });
             if (response.data.success) {
-
+                dispatch({
+                    type: 'LOGIN',
+                    payload: response.data.user
+                })
+                localStorage.setItem("token", JSON.stringify(response.data.token))
+                setUserData({ email: "", password: "" })
+                router('/')
+                toast.success(response.data.message)
                 const user = response.data.user
                 const token = response.data.token
                 // console.log( response.data)
                   await login(user,token)
-
-                setUserData({ email: "", password: "" })
-                router('/')
-                toast.success(response.data.message)
+                //   localStorage.setItem("token", JSON.stringify(response.data.token))
+                // setUserData({ email: "", password: "" })
+                // router('/')
+                // toast.success(response.data.message)
             } else {
                 toast.error(response.data.message)
             }
@@ -39,6 +46,12 @@ const Login = () => {
     }
     // console.log(userData, "userData")
 
+
+    useEffect(() => {
+        if (state?.user?.name) {
+            router('/')
+        }
+    }, [state])
     return (
         <div  className='body-first'>
             <h1>Login</h1>
@@ -50,9 +63,8 @@ const Login = () => {
                 <input  className='submit' type='submit' value='Login' /><br />
             </form>
             <button  className='submit' onClick={() => router('/register')}>Register</button>
-            {/* <p style={{color:"red"}}  onClick={() => router('/register')}>New Register</p> */}
+            <p style={{color:"red"}}  onClick={() => router('/register')}>New Register</p>
         </div>
     )
 }
-
 export default Login

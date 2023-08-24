@@ -1,10 +1,12 @@
-import React, { useState } from 'react'
+import React, { useContext, useState } from 'react'
 import { toast } from 'react-hot-toast'
 import axios from 'axios'
 import { useNavigate } from 'react-router-dom'
 import "./All css/Register.css"
+import { AuthContext } from './Context/Auth.Context'
 
 const Register = () => {
+    const {state} =useContext(AuthContext)
     const [userData, setUserData] = useState({ name: "", email: "", password: "", confirmPassword: "", role: "Buyer" })
 
     const router = useNavigate()
@@ -21,6 +23,7 @@ const Register = () => {
         
         if (userData.name && userData.email && userData.password && userData.confirmPassword && userData.role) {
             if (userData.password === userData.confirmPassword) {
+
                 const response = await axios.post("http://localhost:8000/register", {userData});
                 if (response.data.success) {
 
