@@ -1,4 +1,4 @@
-import React, { useContext, useState } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import { toast } from 'react-hot-toast'
 import axios from 'axios'
 import { useNavigate } from 'react-router-dom'
@@ -42,6 +42,13 @@ const Register = () => {
         }
     }
     // console.log(userData, "userData")
+
+
+    useEffect(() => {
+        if (state?.user?.name) {
+            router('/')
+        }
+    }, [state])
 
     return (
         <div className='body-first'>

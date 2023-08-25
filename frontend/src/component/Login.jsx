@@ -21,10 +21,10 @@ const Login = () => {
         if (userData.email && userData.password) {
             const response = await axios.post("http://localhost:8000/login", { userData });
             if (response.data.success) {
-                dispatch({
-                    type: 'LOGIN',
-                    payload: response.data.user
-                })
+                // dispatch({
+                //     type: 'LOGIN',
+                //     payload: response.data.user
+                // })
                 localStorage.setItem("token", JSON.stringify(response.data.token))
                 setUserData({ email: "", password: "" })
                 router('/')
