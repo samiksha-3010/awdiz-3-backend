@@ -7,7 +7,7 @@ const YourProduct = () => {
         async function getProducts(){
             const token = JSON.parse(localStorage.getItem("token"));
             const response = await axios.post("http:localhost:8000/get-your-products",{ token})
-            if(response.data.success){
+            if(response?.data?.success){
                 setAllProducts(response.data.products)
 
             }
