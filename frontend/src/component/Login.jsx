@@ -7,7 +7,7 @@ import { AuthContext } from './Context/Auth.Context'
 
 const Login = () => {
 
-    const  { state ,login } = useContext(AuthContext)
+    const  { state ,dispatch } = useContext(AuthContext)
     const [userData, setUserData] = useState({ email: "", password: "" })
 
     const router = useNavigate()
@@ -21,10 +21,10 @@ const Login = () => {
         if (userData.email && userData.password) {
             const response = await axios.post("http://localhost:8000/login", { userData });
             if (response.data.success) {
-                // dispatch({
-                //     type: 'LOGIN',
-                //     payload: response.data.user
-                // })
+                dispatch({
+                    type: 'LOGIN',
+                    payload: response.data.user
+                })
                 localStorage.setItem("token", JSON.stringify(response.data.token))
                 setUserData({ email: "", password: "" })
                 router('/')
@@ -32,7 +32,7 @@ const Login = () => {
                 const user = response.data.user
                 const token = response.data.token
                 // console.log( response.data)
-                  await login(user,token)
+                //   await Login(user,token)
                 //   localStorage.setItem("token", JSON.stringify(response.data.token))
                 // setUserData({ email: "", password: "" })
                 // router('/')

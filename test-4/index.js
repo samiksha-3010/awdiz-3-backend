@@ -2,7 +2,8 @@ import express  from "express"
 import dotenv from "dotenv"
 import mongoose from "mongoose"
 import cors from 'cors'
-// import cors from "cors";
+import morgan from "morgan"
+
 import { Login, Register,getCurrentUser } from "./controllers/User.Controllers.js";
 import{ addComments, addProduct, addRating, allProducts, deleteYourProduct, getYourProducts, updateYourProduct} from './controllers/product.Controolers.js'
 import { checkSeller, isAdmin, isValidUser } from "./Meedleware/All.Meedleware.js";
@@ -15,6 +16,7 @@ const app = express();
 app.use(express.json());
 dotenv.config();
 app.use(cors())
+app.use(morgan("dev"))
 
 app.get("/",(req,res) => {
   res.send("working..")
@@ -40,7 +42,7 @@ app.patch('/add-comments',isValidUser, addComments)// - assignemnt - {userId com
 //Seller
 
 app.post("/add-product", checkSeller, addProduct)
-app.get("/get-your-products", checkSeller, getYourProducts)
+app.post("/get-your-products", checkSeller, getYourProducts)
 app.patch("/update-your-product",checkSeller, updateYourProduct )
 app.delete("/delete-your-product",checkSeller,deleteYourProduct)
 app.delete("/remove-cart-product",checkSeller,removeCartProduct)

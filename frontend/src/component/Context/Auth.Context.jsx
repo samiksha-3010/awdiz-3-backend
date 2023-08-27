@@ -1,20 +1,23 @@
 import { createContext, useEffect, useReducer } from "react";
-import axios  from "axios";
+import { toast } from 'react-hot-toast'
+import axios from "axios";
 export const AuthContext = createContext();
-const initialState = { user: null,token:null };
 
-function reducer(state, action) { 
+const initialState = { user: null };
+
+const reducer= (state, action) =>{ 
     switch (action.type) {
-        case "login":
+        case "LOGIN":
 
         return {
             ...state,
-            currentuser: action.payload,
-            token: action.token,
+            user: action.payload,
           };
          
-        case "logout":
-            return {  currentuser: null,token:null } // re - assign
+        case "LOGOUT":
+            localStorage.removeItem("token")
+            toast.success("Logout success.")
+            return {  ...state,user:null } 
         default:
             return state;
     }
@@ -24,42 +27,43 @@ function reducer(state, action) {
 const AuthProvider = ({ children }) => {
     const [state, dispatch] = useReducer(reducer, initialState);
 
-    const login = (userData,token) => {
-
-        localStorage.setItem("UserData", JSON.stringify("userData"))
-        localStorage.setItem("UserToken", JSON.stringify("token"))
-
-       
-    }
-
-    const logout = () => {
-        localStorage.removeItem("userToken");
-        localStorage.removeItem("userData");
-     
-        dispatch
-         ({ type: 'logout',})
-    };
-
     useEffect(() => {
-
-        const getToken = JSON.parse(localStorage.getItem("userToken"));
-    const userData = JSON.parse(localStorage.getItem("userData"));
-            dispatch({
-                type: 'login',
-                token:getToken,
-                payload: userData
-            })
-        
+        async function getCurrentUserData() {
+            var token = JSON.parse(localStorage.getItem("token"));
+            if (token) {
+                const response = await axios.post("http://localhost:8000/get-current-user", { token });
+                if (response.data.success) {
+                    dispatch({
+                        type: "LOGIN",
+                        payload: response.data.user
+                    })
+                } else {
+                    dispatch({
+                        type: "LOGOUT"
+                    });
+                }
+            }
+        }
+        getCurrentUserData();
     }, [])
 
     return (
-        <AuthContext.Provider value={{ state, login, logout }} >
+        <AuthContext.Provider value={{ state, dispatch }} >
             {children}
         </AuthContext.Provider>
     )
 }
 
 export default AuthProvider;
+
+
+
+
+
+
+
+
+
 
 
 
