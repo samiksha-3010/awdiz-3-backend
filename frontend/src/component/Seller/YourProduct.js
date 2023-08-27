@@ -24,11 +24,12 @@ const YourProduct = () => {
         {allProducts?.length ? <div style={{ display: "flex", justifyContent: "space-around" }}> {allProducts.map((product) => (
                <div key={product._id}>
                    <img src={product.image} />
-                    <h2>Name : {product.name}</h2>      
-                  <h3>Price : {product.price}</h3>
+                    <h2>Name :{product.name}</h2>      
+                  <h3>Price :{product.price}</h3>
                 </div>
             ))}
-             </div> : <div>No Products found.</div>}
+             </div> 
+             : <div>No Products found.</div>}
        
 
     </div>

@@ -4,12 +4,12 @@ import { Route, Routes } from 'react-router-dom';
 
 import { AuthContext } from './component/Context/Auth.Context';
 import { useContext } from 'react';
-import Navbar from './component/Navbar';
 import { Home } from './component/Home';
 import Register from './component/Register';
 import Login from './component/Login';
 import AddProduct from './component/Seller/AddProduct';
 import YourProduct from './component/Seller/YourProduct';
+import Navbar from './component/Comman/Navbar';
 
 function App() {
 
