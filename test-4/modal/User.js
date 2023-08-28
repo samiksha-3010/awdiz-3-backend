@@ -1,15 +1,15 @@
 import Mongoose ,{Schema } from "mongoose";
 
 const userSchema = new Schema({
-    name: {
+    name:{
         type: String,
         required: true
     },
-    email: {
+    email:{
         type: String,
         required: true
     },
-    password: {
+    password:{
         type: String,
         required: true
     },
@@ -17,23 +17,23 @@ const userSchema = new Schema({
         type: String,
         required: true
     },
-    isNumberVerified: {
+    isNumberVerified:{
         type: Boolean,
         default: false
     },
-    otpForNumberVerification: {
+    otpForNumberVerification:{
         type: Number,
 
     },
-    role: {
+    role:{
         type: String,
         enum: ["Buyer", "Seller", "Admin"],
         default: "Buyer"
     },
-    cart: {
+    cart:{
         type: [String]
     },
-    wishlist: {
+    wishlist:{
         type: [String]
     },
     isBlocked:{

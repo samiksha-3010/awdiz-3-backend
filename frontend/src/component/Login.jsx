@@ -9,7 +9,6 @@ const Login = () => {
 
     const  { state ,dispatch } = useContext(AuthContext)
     const [userData, setUserData] = useState({ email: "", password: "" })
-
     const router = useNavigate()
 
     const handleChange = (event) => {
@@ -29,8 +28,8 @@ const Login = () => {
                 setUserData({ email: "", password: "" })
                 router('/')
                 toast.success(response.data.message)
-                const user = response.data.user
-                const token = response.data.token
+                // const user = response.data.user
+                // const token = response.data.token
                 // console.log( response.data)
                 //   await Login(user,token)
                 //   localStorage.setItem("token", JSON.stringify(response.data.token))
@@ -44,7 +43,7 @@ const Login = () => {
             toast.error("All fields are mandtory.")
         }
     }
-    // console.log(userData, "userData")
+    console.log(userData, "userData")
 
 
     useEffect(() => {

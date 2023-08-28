@@ -2,22 +2,24 @@ import axios from 'axios';
 import React, { useEffect, useState } from 'react'
 
 const YourProduct = () => {
+ 
+
     const [allProducts,setAllProducts] = useState()
     useEffect(()=>{
         async function getProducts(){
             const token = JSON.parse(localStorage.getItem("token"));
             const response = await axios.post("http:localhost:8000/get-your-products",{ token})
             if(response?.data?.success){
+            
                 setAllProducts(response.data.products)
+                 // console.log(response.data,"productdata");
 
             }
-            getProducts();
-          
         }
-      
-      
-
+        getProducts();
+           // console.log(allProducts,"allproducs")
     },[])
+  
   return (
     <div>
         <h1>Your Product</h1>
@@ -29,7 +31,7 @@ const YourProduct = () => {
                 </div>
             ))}
              </div> 
-             : <div>No Products found.</div>}
+             : <div>No Products found...</div>}
        
 
     </div>

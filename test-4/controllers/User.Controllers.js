@@ -1,6 +1,8 @@
 import User from "./../modal/User.js";
 import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
+import { sendTwilioMessage } from "../Helper/Sms.js";
+
 
 export const Register = async (req, res) => {
   try {
@@ -29,7 +31,6 @@ export const Register = async (req, res) => {
 
     return res.json({
       success: true,
-      // status: "Success",
       message: "User registered Successfully.",
     });
   } catch (error) {
@@ -84,7 +85,7 @@ export const getCurrentUser = async (req, res) => {
         .json({  success: false, message: "Token is required!" });
     }
     const decoededData = jwt.verify(token, process.env.JWT_SECRET);
-console.log(decoededData , "decoededData")
+// console.log(decoededData , "decoededData")
     if (!decoededData) {
       return res.status(404).json({ success: false, message: "Not valid json token.." });
     }
@@ -118,7 +119,7 @@ export const getNumber = async (req, res) => {
       const { userId } = req.body;
       if (!userId) return res.json({ success: false, message: "User Id is mandtory.." })
 
-      const userNumber = await UserModal.findById(userId).select("number isNumberVerified");
+      const userNumber = await User.findById(userId).select("number isNumberVerified");
       if (userNumber) {
           return res.json({ success: true, number: userNumber.number, isNumberVerified: userNumber.isNumberVerified })
       }
@@ -134,9 +135,9 @@ export const sendOtp = async (req, res) => {
       const { userId } = req.body;
       if (!userId) return res.json({ success: false, message: "User Id is mandtory.." })
 
-      const userNumber = await UserModal.findById(userId);
+      const userNumber = await User.findById(userId);
 
-      const otp = "987676" // use nanoid or uuid
+      const otp = "301002" 
       const message = `Hi, Your Awdiz mobile verification otp is - ${otp}`
       if (userNumber) {
 
@@ -145,10 +146,10 @@ export const sendOtp = async (req, res) => {
           if (responseFromTwilio) {
               userNumber.otpForNumberVerification = otp;
               await userNumber.save()
-              return res.json({ success: true, message: "Otp sent to your number." })
+              return res.json({ success: true, message: "Otp sent to your Number." })
           }
       }
-      return res.json({ success: false, message: "User not foudn.." })
+      return res.json({ success: false, message: "User not found.." })
 
   } catch (error) {
       return res.json({ success: false, message: error })

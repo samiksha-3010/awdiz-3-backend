@@ -60,7 +60,7 @@ export const getYourProducts = async (req, res) => {
 4
         const userId = decodedData.userId;
 
-        const yourProducts = await ProductModal.find({ })
+        const yourProducts = await ProductModal.find({ userId:userId})
 
         // console.log( )
 

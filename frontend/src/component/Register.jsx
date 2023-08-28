@@ -8,6 +8,7 @@ import { AuthContext } from './Context/Auth.Context'
 const Register = () => {
     const {state} =useContext(AuthContext)
     const [userData, setUserData] = useState({ name: "", email: "", password: "", confirmPassword: "", role: "Buyer",number:""})
+    console.log(userData,"-userData")
 
     const router = useNavigate()
 
@@ -23,6 +24,7 @@ const Register = () => {
         
         if (userData.name && userData.email && userData.password && userData.confirmPassword && userData.role && userData.number) {
             if (userData.password === userData.confirmPassword) {
+
 
                 const response = await axios.post("http://localhost:8000/register", {userData});
                 if (response.data.success) {
@@ -41,7 +43,7 @@ const Register = () => {
             toast.error("All field are mandtory...")
         }
     }
-    // console.log(userData, "userData")
+    console.log(userData, "userData")
 
 
     useEffect(() => {
@@ -57,7 +59,9 @@ const Register = () => {
                 <label >Name</label><br />
                 <input className='input-email' type='text' onChange={handleChange} name='name' value={userData.name} /><br />
                 <label>Email</label><br />
-                <input   className='input-email' type='email' onChange={handleChange} name='email' value={userData.email} /><br />
+                <input className='input-email' type='email' onChange={handleChange} name='email' value={userData.email} /><br />
+                <lable>Number</lable><br/>
+                <input className='input-email'type='number' onChange={handleChange} name='number' value={userData.number}/><br/>
                 <label>Role</label><br />
                 <select onChange={handleChangeForSelect} >
                     <option value="Buyer">Buyer</option>
@@ -68,8 +72,6 @@ const Register = () => {
                 <label>Confirm Password</label><br />
                 <input className='input-email'  type='password' onChange={handleChange} name='confirmPassword' value={userData.confirmPassword} /><br />
                 <input  className='submit' type='submit' value='Register' /><br />
-                <lable>Number</lable><br/>
-                <input className='input-email'type='number' onChange={handleChange} name='number' value={userData.confirmPassword}/>
             </form>
             {/* <button className='submit' onClick={()=> router('/login')}>Login</button> */}
             <p style={{color:"red"}} onClick={()=> router('/login')}>Already have Acount Click Here?</p>

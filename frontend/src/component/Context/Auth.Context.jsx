@@ -31,6 +31,8 @@ const AuthProvider = ({ children }) => {
         async function getCurrentUserData() {
             var token = JSON.parse(localStorage.getItem("token"));
             if (token) {
+
+              try {
                 const response = await axios.post("http://localhost:8000/get-current-user", { token });
                 if (response.data.success) {
                     dispatch({
@@ -41,7 +43,12 @@ const AuthProvider = ({ children }) => {
                     dispatch({
                         type: "LOGOUT"
                     });
-                }
+                 }
+                
+              } catch (error) {
+                console.log(error)
+                
+              }
             }
         }
         getCurrentUserData();
@@ -67,52 +74,5 @@ export default AuthProvider;
 
 
 
-// import { createContext, useEffect, useReducer } from "react";
-// import axios  from "axios";
-// export const AuthContext = createContext();
-// const initialState = { user: null,token:null };
 
-// function reducer(state, action) { 
-//     switch (action.type) {
-//         case "LOGIN":
-
-//         return {
-//             ...state,
-//             currentuser: action.payload,
-//             token: action.token,
-//           };
-         
-//         case "LOGOUT":
-//             return {  currentuser: null,token:null } // re - assign
-//         default:
-//             return state;
-//     }
-// }
-
-// const HandleAuthContext = ({children}) =>{
-//     const [state,dispatch] = useReducer(reducer,initialState)
-
-//     useEffect(()=>{
-//         async function getCurrentUserData(){
-//             var token = JSON.parse(localStorage.getItem("token"));
-//             const response = await axios.post("http://localhost:3000/get-current-user",{token})
-//             if(response.data.success){
-//                 dispatch({ 
-//                     type:"LOGIN",
-//                     payload:response.data.user
-//                 })
-//             }else{
-//                 dispatch({type:"LOGOUT"});
-//             }
-//         }
-//         getCurrentUserData();
-//     },[])
-
-//     return(
-//         <AuthContext.Provider value={{state,dispatch}}>
-//          {children}
-//         </AuthContext.Provider>
-//     )
-// }
-// export default HandleAuthContext
 

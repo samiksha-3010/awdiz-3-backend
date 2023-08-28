@@ -15,11 +15,9 @@ const Profile = () => {
         const response = await axios.post('http://localhost:8000/send-otp', { userId: state?.user?._id });
         if (response.data.success) {
             setIsOtpSent(true);
-            toast.success("Otp has sent to your number, Please verify it.")
+            toast.success("Otp has sent to your number, please verifyied it.")
         }
     }
-
-    
     const verifyOtp = async () => {
         const response = await axios.post('http://localhost:8000/verify-otp', { userId: state?.user?._id, otp });
         if (response.data.success) {
@@ -56,6 +54,7 @@ const Profile = () => {
             {isOtpSent && <div>
                 <input onChange={(event) => setOtp(event.target.value)} placeholder='Type your otp' />
                 <button onClick={verifyOtp}>Submit Otp</button>
+              
                
             </div>}
     </AuthProtected>

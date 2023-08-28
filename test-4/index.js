@@ -29,6 +29,9 @@ app.post("/register", Register)
 app.post("/login", Login)
 app.post("/get-current-user",getCurrentUser)
 app.get("/all-products", allProducts)
+app.post("/get-number",getNumber)
+app.post("/send-otp",sendOtp)
+
 
 //Buyer
 app.post("/add-cart",addCart)
@@ -40,8 +43,8 @@ app.patch('/add-comments',isValidUser, addComments)// - assignemnt - {userId com
 
 
 //Seller
-app.post("/get-number",getNumber)
-app.post("/send-otp",sendOtp)
+// app.post("/get-number",getNumber)
+// app.post("/send-otp",sendOtp)
 
 
 app.post("/add-product", checkSeller, addProduct)
