@@ -12,7 +12,7 @@ const Profile = () => {
     const {state} = useContext(AuthContext)
 
     const sendOtp = async () => {
-        const response = await axios.post('http://localhost:8002/send-otp', { userId: state?.user?._id });
+        const response = await axios.post('http://localhost:8000/send-otp', { userId: state?.user?._id });
         if (response.data.success) {
             setIsOtpSent(true);
             toast.success("Otp has sent to your number, Please verify it.")
@@ -21,7 +21,7 @@ const Profile = () => {
 
     
     const verifyOtp = async () => {
-        const response = await axios.post('http://localhost:8002/verify-otp', { userId: state?.user?._id, otp });
+        const response = await axios.post('http://localhost:8000/verify-otp', { userId: state?.user?._id, otp });
         if (response.data.success) {
             setIsOtpSent(false);
             setIsNumberVerified(response.data.isNumberVerified)
@@ -33,7 +33,7 @@ const Profile = () => {
         async function getNumber() {
             // alert("called fuction")
             try {
-                const response = await axios.post("http://localhost:8002/get-number", { userId: state?.user?._id })
+                const response = await axios.post("http://localhost:8000/get-number", { userId: state?.user?._id })
                 if (response.data.success) {
                     console.log(response.data, "response.data")
                     setNumber(response.data.number)

@@ -40,7 +40,7 @@ app.patch('/add-comments',isValidUser, addComments)// - assignemnt - {userId com
 
 
 //Seller
-app.post("/get-numer",getNumber)
+app.post("/get-number",getNumber)
 app.post("/send-otp",sendOtp)
 
 

@@ -58,7 +58,6 @@ const Register = () => {
                 <input className='input-email' type='text' onChange={handleChange} name='name' value={userData.name} /><br />
                 <label>Email</label><br />
                 <input   className='input-email' type='email' onChange={handleChange} name='email' value={userData.email} /><br />
-                {/* <input   className='input-email'  type='email' onChange={handleChange} name='email' value={userData.email} /><br /> */}
                 <label>Role</label><br />
                 <select onChange={handleChangeForSelect} >
                     <option value="Buyer">Buyer</option>

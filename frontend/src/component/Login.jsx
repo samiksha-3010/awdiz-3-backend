@@ -58,7 +58,7 @@ const Login = () => {
             <form onSubmit={handleSubmit}>
                 <label className='email'>Email</label><br />
                 <input  className='input-email' type='email' onChange={handleChange} name='email' value={userData.email} /><br />
-                <label >Password</label><br />
+                <label>Password</label><br />
                 <input  className='input-email' type='password' onChange={handleChange} name='password' value={userData.password} /><br />
                 <input  className='submit' type='submit' value='Login' /><br />
             </form>
