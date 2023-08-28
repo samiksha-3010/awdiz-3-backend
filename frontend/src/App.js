@@ -10,6 +10,7 @@ import Login from './component/Login';
 import AddProduct from './component/Seller/AddProduct';
 import YourProduct from './component/Seller/YourProduct';
 import Navbar from './component/Comman/Navbar';
+import Profile from './component/Profile';
 
 function App() {
 
@@ -25,6 +26,8 @@ function App() {
      <Route path='/register' element={<Register />} />
      <Route path='/add-product' element={<AddProduct />} />
      <Route path='/your-product' element={<YourProduct />} />
+     <Route path='/profile' element={<Profile/>} />
+
 
 
      </Routes>

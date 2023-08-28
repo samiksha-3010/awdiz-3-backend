@@ -13,6 +13,18 @@ const userSchema = new Schema({
         type: String,
         required: true
     },
+    number:{
+        type: String,
+        required: true
+    },
+    isNumberVerified: {
+        type: Boolean,
+        default: false
+    },
+    otpForNumberVerification: {
+        type: Number,
+
+    },
     role: {
         type: String,
         enum: ["Buyer", "Seller", "Admin"],

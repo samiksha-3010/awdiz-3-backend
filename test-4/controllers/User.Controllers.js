@@ -5,10 +5,10 @@ import jwt from "jsonwebtoken";
 export const Register = async (req, res) => {
   try {
     const { userData } = req.body;
-    const { name, email, password, role } = userData;
+    const { name, email, password, role,number} = userData;
 
 
-    if (!name || !email || !password || !role)
+    if (!name || !email || !password || !role ||!number )
       return res.json({
         success : false ,
         message: "All fields are mandtory.."
@@ -23,7 +23,7 @@ export const Register = async (req, res) => {
     }
     const hashedPassword = await bcrypt.hash(password, 10);
 
-    const user = new User({ name, email, password: hashedPassword, role });
+    const user = new User({ name, email, password: hashedPassword, role ,number});
 
     await user.save();
 
@@ -112,6 +112,51 @@ console.log(decoededData , "decoededData")
     // return res.json({status: "error", message: "error"})
   }
 };
+
+export const getNumber = async (req, res) => {
+  try {
+      const { userId } = req.body;
+      if (!userId) return res.json({ success: false, message: "User Id is mandtory.." })
+
+      const userNumber = await UserModal.findById(userId).select("number isNumberVerified");
+      if (userNumber) {
+          return res.json({ success: true, number: userNumber.number, isNumberVerified: userNumber.isNumberVerified })
+      }
+      return res.json({ success: false, message: "Internal error try again.." })
+
+  } catch (error) {
+      return res.json({ success: false, message: error })
+  }
+}
+
+export const sendOtp = async (req, res) => {
+  try {
+      const { userId } = req.body;
+      if (!userId) return res.json({ success: false, message: "User Id is mandtory.." })
+
+      const userNumber = await UserModal.findById(userId);
+
+      const otp = "987676" // use nanoid or uuid
+      const message = `Hi, Your Awdiz mobile verification otp is - ${otp}`
+      if (userNumber) {
+
+          const responseFromTwilio = sendTwilioMessage(userNumber.number, message)
+          console.log(responseFromTwilio, "responseFromTwilio")
+          if (responseFromTwilio) {
+              userNumber.otpForNumberVerification = otp;
+              await userNumber.save()
+              return res.json({ success: true, message: "Otp sent to your number." })
+          }
+      }
+      return res.json({ success: false, message: "User not foudn.." })
+
+  } catch (error) {
+      return res.json({ success: false, message: error })
+  }
+}
+
+
+
 
 
 

@@ -4,7 +4,7 @@ import mongoose from "mongoose"
 import cors from 'cors'
 import morgan from "morgan"
 
-import { Login, Register,getCurrentUser } from "./controllers/User.Controllers.js";
+import { Login, Register,getCurrentUser, getNumber, sendOtp } from "./controllers/User.Controllers.js";
 import{ addComments, addProduct, addRating, allProducts, deleteYourProduct, getYourProducts, updateYourProduct} from './controllers/product.Controolers.js'
 import { checkSeller, isAdmin, isValidUser } from "./Meedleware/All.Meedleware.js";
 import { addCart, addWishlist, getCartProducts, getWishlistProducts, removeCartProduct} from "./controllers/Buyer.Controolers.js";
@@ -40,6 +40,9 @@ app.patch('/add-comments',isValidUser, addComments)// - assignemnt - {userId com
 
 
 //Seller
+app.post("/get-numer",getNumber)
+app.post("/send-otp",sendOtp)
+
 
 app.post("/add-product", checkSeller, addProduct)
 app.post("/get-your-products", checkSeller, getYourProducts)
