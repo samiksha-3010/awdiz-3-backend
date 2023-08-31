@@ -4,7 +4,7 @@ import User from "./../modal/User.js";
 
 export const addProduct = async (req, res) => {
     try {
-        const { name, price, image, category } = req.body.productData;
+        const { name, price, image, category } = req.body;
         const{token} = req.body
         if (!name || !price || !image || !category || !token) return res.status(404).json({success: false, message: "All fields are mandtory.." })
 
@@ -27,7 +27,7 @@ export const addProduct = async (req, res) => {
         return res.status(201).json({success: true, message: "Product Created Successfully."  })
 
     } catch (error) {
-        return res.status(500).json({ success: false, message : error.message})
+        return res.status(500).json({ success: false, message :error.message })
     }
 }
 

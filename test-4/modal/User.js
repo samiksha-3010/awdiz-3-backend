@@ -14,7 +14,7 @@ const userSchema = new Schema({
         required: true
     },
     number:{
-        type: String,
+        type: Number,
         required: true
     },
     isNumberVerified:{
@@ -23,6 +23,7 @@ const userSchema = new Schema({
     },
     otpForNumberVerification:{
         type: Number,
+        default:null,
 
     },
     role:{

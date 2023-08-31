@@ -34,7 +34,7 @@ export const Register = async (req, res) => {
       message: "User registered Successfully.",
     });
   } catch (error) {
-    return res.json({ success: false, message: error })
+    return res.json({ success: false, message: error.message })
     // return res.json({ status: "error", message: error.message });
   }
 };
@@ -72,7 +72,7 @@ export const Login = async (req, res) => {
     }
     return res.json({ success : false, message: "Password is wrong." });
   } catch (error) {
-    return res.json({ success : false, message: "error" });
+    return res.json({ success : false, message: error.message });
   }
 };
 
