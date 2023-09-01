@@ -4,6 +4,8 @@ import axios from 'axios'
 import { useNavigate } from 'react-router-dom'
 import "./All css/Login.css"
 import { AuthContext } from './Context/Auth.Context'
+import api from './ApiConfig/index';
+
 
 const Login = () => {
 
@@ -18,7 +20,8 @@ const Login = () => {
     const handleSubmit = async (event) => {
         event.preventDefault();
         if (userData.email && userData.password) {
-            const response = await axios.post("http://localhost:8000/login", { userData });
+            const response = await api.post("/all/login", { userData });
+            // const response = await axios.post("http://localhost:8000/login", { userData });
             if (response.data.success) {
                 dispatch({
                     type: 'LOGIN',
@@ -28,14 +31,7 @@ const Login = () => {
                 setUserData({ email: "", password: "" })
                 router('/')
                 toast.success(response.data.message)
-                // const user = response.data.user
-                // const token = response.data.token
-                // console.log( response.data)
-                //   await Login(user,token)
-                //   localStorage.setItem("token", JSON.stringify(response.data.token))
-                // setUserData({ email: "", password: "" })
-                // router('/')
-                // toast.success(response.data.message)
+               
             } else {
                 toast.error(response.data.message)
             }

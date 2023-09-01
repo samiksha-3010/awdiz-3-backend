@@ -4,6 +4,7 @@ import axios from 'axios'
 import { useNavigate } from 'react-router-dom'
 import "./All css/Register.css"
 import { AuthContext } from './Context/Auth.Context'
+import api from './ApiConfig'
 
 const Register = () => {
     const {state} =useContext(AuthContext)
@@ -26,7 +27,8 @@ const Register = () => {
             if (userData.password === userData.confirmPassword) {
 
 
-                const response = await axios.post("http://localhost:8000/register", {userData});
+                // const response = await api.post("http://localhost:8000/register", {userData});
+                const response = await api.post("/all/register", { userData });
                 if (response.data.success) {
 
                     setUserData({ name: "", email: "", password: "", confirmPassword: "", role: "Buyer",number:"" })

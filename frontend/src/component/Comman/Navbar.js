@@ -8,7 +8,7 @@ const Navbar = () => {
   return (
     <div style={{border:"1px solid black",display:"flex",justifyContent:"space-around",height:"70px"}}>
         <div  style={{ width: "50%", display: 'flex', justifyContent: 'space-around' }}> 
-            <h4>Logo</h4>
+            <h4 onClick={() => router('/all-products')}>Logo</h4>
             {state?.user?.role != "Seller" && <h4>Mens</h4>}
             {state?.user?.role != "Seller" &&<h4>Womens</h4>}
             {state?.user?.role != "Seller" && <h4>Kids</h4>}

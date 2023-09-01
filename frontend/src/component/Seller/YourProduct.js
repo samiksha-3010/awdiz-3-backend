@@ -1,14 +1,12 @@
 import axios from 'axios';
 import React, { useEffect, useState } from 'react'
-
+import api from '../ApiConfig';
 const YourProduct = () => {
- 
-
     const [allProducts,setAllProducts] = useState()
     useEffect(()=>{
         async function getProducts(){
             const token = JSON.parse(localStorage.getItem("token"));
-            const response = await axios.post("http:localhost:8000/get-your-products",{ token})
+            const response = await api.post("http:localhost:8000/get-your-products",{ token})
             if(response?.data?.success){
             
                 setAllProducts(response.data.products)

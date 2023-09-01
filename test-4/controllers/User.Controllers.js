@@ -5,6 +5,7 @@ import { sendTwilioMessage } from "../Helper/Sms.js";
 
 
 export const Register = async (req, res) => {
+  // console.log(req.headers, "headers")
   try {
     const { userData } = req.body;
     const { name, email, password, role,number} = userData;
@@ -61,6 +62,9 @@ export const Login = async (req, res) => {
         _id: user._id,
         role: user.role
       };
+        // console.log("Before ")
+        const expirytime = user?.role == "Seller" ? "4h" : "1h";
+        // console.log(expirytime, "expirytime")
       const token = jwt.sign({ userId: user._id }, process.env.JWT_SECRET);
       // console.log(token, "token her");
       return res.json({
@@ -154,7 +158,53 @@ export const sendOtp = async (req, res) => {
   } catch (error) {
       return res.json({ success: false, message: error })
   }
+ 
 }
+
+export const verifyOtp = async (req, res) => {
+  try {
+    const { otp, userId } = req.body;
+
+    if (!userId) {
+      return res
+        .status(404)
+        .json({ success: false, message: "User Id is required!" });
+    }
+
+    if (!otp) {
+      return res
+        .status(404)
+        .json({ success: false, message: "OTP is required!" });
+    }
+
+    const user = await User.findById(userId);
+
+    if (user) {
+      if (user.otpForNumberVerification == otp) {
+        
+        user.isNumberVerified = true;
+
+        await user.save();
+
+        return res.status(200).json({
+          success: true,
+          isNumberVerified: user.isNumberVerified,
+          message: "OTP verified successfully!",
+        });
+      }
+      return res
+        .status(404)
+        .json({ success: false, message: "Not a valid OTP number!" });
+    }
+    return res
+      .status(404)
+      .json({ success: false, message: "Not a valid user!" });
+  } catch (error) {
+    return res.json({ success: false, message: error });
+  }
+};
+
+
 
 
 

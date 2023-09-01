@@ -3,8 +3,9 @@ import jwt from "jsonwebtoken";
 import User from "./../modal/User.js";
 
 export const addProduct = async (req, res) => {
+    // console.log(fulltoken,"fulltoken")
     try {
-        const { name, price, image, category } = req.body;
+        const { name, price, image, category } = req.body.userData;
         const{token} = req.body
         if (!name || !price || !image || !category || !token) return res.status(404).json({success: false, message: "All fields are mandtory.." })
 

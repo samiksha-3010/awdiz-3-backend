@@ -3,6 +3,7 @@ import { AuthContext } from './Context/Auth.Context'
 import toast from 'react-hot-toast'
 import AuthProtected from './Comman/AuthProtected'
 import axios from 'axios'
+import api from './ApiConfig'
 
 const Profile = () => {
     const [number, setNumber] = useState()
@@ -12,14 +13,14 @@ const Profile = () => {
     const {state} = useContext(AuthContext)
 
     const sendOtp = async () => {
-        const response = await axios.post('http://localhost:8000/send-otp', { userId: state?.user?._id });
+        const response = await api.post('http://localhost:8000/send-otp', { userId: state?.user?._id });
         if (response.data.success) {
             setIsOtpSent(true);
             toast.success("Otp has sent to your number, please verifyied it.")
         }
     }
     const verifyOtp = async () => {
-        const response = await axios.post('http://localhost:8000/verify-otp', { userId: state?.user?._id, otp });
+        const response = await api.post('http://localhost:8000/verify-otp', { userId: state?.user?._id, otp });
         if (response.data.success) {
             setIsOtpSent(false);
             setIsNumberVerified(response.data.isNumberVerified)
@@ -31,7 +32,7 @@ const Profile = () => {
         async function getNumber() {
             // alert("called fuction")
             try {
-                const response = await axios.post("http://localhost:8000/get-number", { userId: state?.user?._id })
+                const response = await api.post("http://localhost:8000/get-number", { userId: state?.user?._id })
                 if (response.data.success) {
                     console.log(response.data, "response.data")
                     setNumber(response.data.number)
