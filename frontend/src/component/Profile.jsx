@@ -16,7 +16,7 @@ const Profile = () => {
         const response = await api.post('http://localhost:8000/send-otp', { userId: state?.user?._id });
         if (response.data.success) {
             setIsOtpSent(true);
-            toast.success("Otp has sent to your number, please verifyied it.")
+            toast.success("Otp has sent , please verifyied it.")
         }
     }
     const verifyOtp = async () => {
@@ -34,7 +34,7 @@ const Profile = () => {
             try {
                 const response = await api.post("http://localhost:8000/get-number", { userId: state?.user?._id })
                 if (response.data.success) {
-                    console.log(response.data, "response.data")
+                    // console.log(response.data, "response.data")
                     setNumber(response.data.number)
                     setIsNumberVerified(response.data.isNumberVerified)
                 }

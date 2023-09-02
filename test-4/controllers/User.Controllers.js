@@ -3,20 +3,17 @@ import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
 import { sendTwilioMessage } from "../Helper/Sms.js";
 
-
+ 
 export const Register = async (req, res) => {
   // console.log(req.headers, "headers")
   try {
     const { userData } = req.body;
     const { name, email, password, role,number} = userData;
-
-
     if (!name || !email || !password || !role ||!number )
       return res.json({
         success : false ,
         message: "All fields are mandtory.."
-      });
-
+      }); 
     const isEmailExist = await User.find({ email: email });
     if (isEmailExist.length) {
       return res.json({
@@ -35,11 +32,12 @@ export const Register = async (req, res) => {
       message: "User registered Successfully.",
     });
   } catch (error) {
-    return res.json({ success: false, message: error.message })
+    return res.json({ success: false, message: error.message },)
     // return res.json({ status: "error", message: error.message });
   }
 };
 
+ 
 export const Login = async (req, res) => {
   try {
     const { email, password } = req.body.userData;
@@ -52,7 +50,7 @@ export const Login = async (req, res) => {
     const user = await User.findOne({ email: email });
     if (!user)
       return res.json({ success : false, message: "User not found.." });
-
+`z1q1 `
     const isPasswordRight = await bcrypt.compare(password, user.password);
     // console.log(isPasswordRight, "isPasswordRight");
     if (isPasswordRight) {
@@ -118,7 +116,7 @@ export const getCurrentUser = async (req, res) => {
   }
 };
 
-export const getNumber = async (req, res) => {
+export const getNumber = async (req, res) => {  
   try {
       const { userId } = req.body;
       if (!userId) return res.json({ success: false, message: "User Id is mandtory.." })

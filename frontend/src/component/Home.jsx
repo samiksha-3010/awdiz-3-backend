@@ -8,7 +8,7 @@ export const Home = () => {
   // console.log(state?.user,"-user")
 
   return (
-    <div><h1>Home User Name - {state?.user?.name} </h1>
+    <div><h1>Home User Name Welcome - {state?.user?.name} </h1>
     <AllProducts/></div>
   )
 }

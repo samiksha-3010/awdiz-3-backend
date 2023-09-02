@@ -7,13 +7,6 @@ import jwt from 'jsonwebtoken';
 import routesIndex from './routes/index.js'
 
 
-
-import{ addComments, addProduct, addRating, allProducts, deleteYourProduct, getYourProducts, updateYourProduct} from './controllers/product.Controolers.js'
-import { checkSeller, isAdmin, isValidUser } from "./Meedleware/All.Meedleware.js";
-import { blockProduct, blockUser, getAllBuyers, getAllProducts, getAllSellers, getBlockedProducts, getUnVerifiedProducts, getverifiedProducts, unBlockUser, unblockProduct, verifyProduct } from "./controllers/Admin.Controolers.js";
-
-
-
 const app = express();
 app.use(express.json());
 dotenv.config();
@@ -41,7 +34,7 @@ function checkJwt(req, res, next) {
               const currentTimestamp = Math.floor(Date.now() / 1000);
               console.log(expTime, currentTimestamp, "expTime at middleware")
               if (currentTimestamp > expTime) {
-                  return res.status(404).json({ success: false, message: "Session is over, Please login again." })
+                  return res.status(404).json({ success: false, message: "session is over, please login again." })
               }
               next();
           } catch (error) {

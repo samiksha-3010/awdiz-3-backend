@@ -1,7 +1,9 @@
 import { createContext, useEffect, useReducer } from "react";
 import { toast } from 'react-hot-toast'
+// import api from "./ApiConfig"
 import axios from "axios";
 export const AuthContext = createContext();
+
 
 const initialState = { user: null };
 
@@ -33,6 +35,7 @@ const AuthProvider = ({ children }) => {
             if (token) {
 
               try {
+                // const response = await api.post("/all/get-current-user", { token });
                 const response = await axios.post("http://localhost:8000/get-current-user", { token });
                 if (response.data.success) {
                     dispatch({

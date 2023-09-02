@@ -23,7 +23,6 @@ const AddProduct = () => {
             const token = JSON.parse(localStorage.getItem("token"))
             try {
                 const response = await api.post("/seller/add-product", { token, productData });
-                // const response = await axios.post("http://localhost:8000/add-product", { token, productData });
                 if (response.data.success) {
                     setProductData({ name: "", price: "", image: "", category: "" })
                     router('/your-product')
