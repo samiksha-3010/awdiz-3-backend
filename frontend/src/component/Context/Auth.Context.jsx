@@ -2,6 +2,7 @@ import { createContext, useEffect, useReducer } from "react";
 import { toast } from 'react-hot-toast'
 // import api from "./ApiConfig"
 import axios from "axios";
+import api from "../ApiConfig";
 export const AuthContext = createContext();
 
 
@@ -36,17 +37,13 @@ const AuthProvider = ({ children }) => {
 
               try {
                 // const response = await api.post("/all/get-current-user", { token });
-                const response = await axios.post("http://localhost:8000/get-current-user", { token });
+                const response = await api.post("/all/get-current-user", { token });
                 if (response.data.success) {
                     dispatch({
                         type: "LOGIN",
                         payload: response.data.user
                     })
-                } else {
-                    dispatch({
-                        type: "LOGOUT"
-                    });
-                 }
+                } 
                 
               } catch (error) {
                 console.log(error)

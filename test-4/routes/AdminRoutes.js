@@ -14,8 +14,8 @@ router.patch("/unblock-user", isAdmin, unBlockUser)
 router.patch("/block-product", isAdmin, blockProduct)
 router.patch("/un-block-product", isAdmin, unblockProduct)
 router.patch("/verify-product", isAdmin, verifyProduct)
- router.patch("/get-verify-product", isAdmin, getverifiedProducts) - assignemnt
- router.patch("/get-un-verify-product", isAdmin, getUnVerifiedProducts) - assignemnt
- router.patch("/get-blocked-product", isAdmin, getBlockedProducts) - assignemnt
+ router.patch("/get-verify-product", isAdmin, getverifiedProducts) // assignemnt
+ router.patch("/get-un-verify-product", isAdmin, getUnVerifiedProducts) // assignemnt
+ router.patch("/get-blocked-product", isAdmin, getBlockedProducts) // assignemnt
 
 export default router;

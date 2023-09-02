@@ -25,7 +25,7 @@ const AddProduct = () => {
                 const response = await api.post("/seller/add-product", { token, productData });
                 if (response.data.success) {
                     setProductData({ name: "", price: "", image: "", category: "" })
-                    router('/your-product')
+                    router('/')
                     toast.success(response.data.message)
                 }
             } catch (error) {

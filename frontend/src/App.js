@@ -8,9 +8,13 @@ import { Home } from './component/Home';
 import Register from './component/Register';
 import Login from './component/Login';
 import AddProduct from './component/Seller/AddProduct';
-import YourProduct from './component/Seller/YourProduct';
 import Navbar from './component/Comman/Navbar';
 import Profile from './component/Profile';
+import SingleProduct from './component/BUYER/SingleProduct';
+import Cart from './component/BUYER/Cart';
+import YourProducts from './component/Seller/YourProducts';
+
+
 
 function App() {
 
@@ -25,8 +29,14 @@ function App() {
      <Route path='/login' element={< Login/>} />
      <Route path='/register' element={<Register />} />
      <Route path='/add-product' element={<AddProduct />} />
-     <Route path='/your-product' element={<YourProduct />} />
      <Route path='/profile' element={<Profile/>} />
+     <Route path='/singleproduct/:id' element={<SingleProduct/>}/>
+     <Route path='/cart' element={<Cart/>}/>
+     <Route path='/your-product' element={<YourProducts/>}/>
+
+
+
+     
 
 
 
