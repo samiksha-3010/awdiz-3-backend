@@ -20,6 +20,7 @@ app.get("/",(req,res) => {
 
 
 
+
 function checkJwt(req, res, next) {
   const fullToken = req.headers.authorization
   console.log(fullToken, "fullToken")

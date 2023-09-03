@@ -41,8 +41,6 @@ const  SingleProduct = () => {
             toast.error("Internal server error, please try again...")
         }
     }
-
-
     return (
         <div>
             {singleProductData?.name ? <div style={{ display: 'flex', justifyContent: 'space-around' }}>

@@ -11,6 +11,7 @@ const Register = () => {
     const [userData, setUserData] = useState({ name: "", email: "", password: "", confirmPassword: "", role: "Buyer",number:""})
     console.log(userData,"-userData")
 
+    
     const router = useNavigate()
 
     const handleChange = (event) => {
@@ -24,7 +25,7 @@ const Register = () => {
         event.preventDefault();
         
         if (userData.name && userData.email && userData.password && userData.confirmPassword && userData.role && userData.number) {
-            if (userData.password === userData.confirmPassword) {
+            if (userData.password === userData.confirmPassword){
 
 
                 // const response = await api.post("http://localhost:8000/register", {userData});

@@ -1,10 +1,8 @@
 import { createContext, useEffect, useReducer } from "react";
 import { toast } from 'react-hot-toast'
-// import api from "./ApiConfig"
 import axios from "axios";
 import api from "../ApiConfig";
 export const AuthContext = createContext();
-
 
 const initialState = { user: null };
 
@@ -23,7 +21,7 @@ const reducer= (state, action) =>{
             return {  ...state,user:null } 
         default:
             return state;
-    }
+    }  
 }
 
 
