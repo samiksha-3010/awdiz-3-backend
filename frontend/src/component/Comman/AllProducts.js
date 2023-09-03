@@ -38,7 +38,7 @@ import { useNavigate } from 'react-router-dom';
 const Allproducts = () => {
     const [products, setProducts] = useState();
     const router = useNavigate();
-    console.log(products, "products here")
+   
     useEffect(() => {
         async function getProducts() {
             try {
@@ -53,6 +53,7 @@ const Allproducts = () => {
         }
         getProducts();
     }, [])
+    console.log(products, "products here")
     return (
         <div>
             <h1>All Products</h1>

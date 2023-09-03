@@ -11,8 +11,8 @@ import AddProduct from './component/Seller/AddProduct';
 import Navbar from './component/Comman/Navbar';
 import Profile from './component/Profile';
 import SingleProduct from './component/BUYER/SingleProduct';
-import Cart from './component/BUYER/Cart';
 import YourProducts from './component/Seller/YourProducts';
+import Cart from './component/Buyer/Cart';
 
 
 

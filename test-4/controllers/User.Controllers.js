@@ -3,6 +3,7 @@ import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
 import { sendTwilioMessage } from "../Helper/Sms.js";
 
+
  
 export const Register = async (req, res) => {
   // console.log(req.headers, "headers")
@@ -14,6 +15,7 @@ export const Register = async (req, res) => {
         success : false ,
         message: "All fields are mandtory.."
       }); 
+      
     const isEmailExist = await User.find({ email: email });
     if (isEmailExist.length) {
       return res.json({
