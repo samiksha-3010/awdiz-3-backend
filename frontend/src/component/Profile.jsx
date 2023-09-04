@@ -13,14 +13,14 @@ const Profile = () => {
     const {state} = useContext(AuthContext)
 
     const sendOtp = async () => {
-        const response = await api.post('http://localhost:8000/send-otp', { userId: state?.user?._id });
+        const response = await api.post('/all/send-otp', { userId: state?.user?._id });
         if (response.data.success) {
             setIsOtpSent(true);
             toast.success("Otp has sent , please verifyied it.")
         }
     }
     const verifyOtp = async () => {
-        const response = await api.post('http://localhost:8000/verify-otp', { userId: state?.user?._id, otp });
+        const response = await api.post('/all/verify-otp', { userId: state?.user?._id, otp });
         if (response.data.success) {
             setIsOtpSent(false);
             setIsNumberVerified(response.data.isNumberVerified)
@@ -32,7 +32,7 @@ const Profile = () => {
         async function getNumber() {
             // alert("called fuction")
             try {
-                const response = await api.post("http://localhost:8000/get-number", { userId: state?.user?._id })
+                const response = await api.post("/all/get-number", { userId: state?.user?._id })
                 if (response.data.success) {
                     // console.log(response.data, "response.data")
                     setNumber(response.data.number)

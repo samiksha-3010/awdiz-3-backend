@@ -1,5 +1,3 @@
-
-
 import React, { useContext, useEffect, useState } from 'react'
 import { useParams } from 'react-router-dom'
 import api from '../ApiConfig';
@@ -18,7 +16,7 @@ const SingleProduct  = () => {
         if (id) {
             async function getSingleProductData() {
                 try {
-                    const response = await api.post('/all/get-single-product-data', { productId: id })
+                    const response = await api.post('/buyer/get-single-product-data', { productId: id })
                     if (response.data.success) {
                         setSingleProductData(response.data.product)
                     }

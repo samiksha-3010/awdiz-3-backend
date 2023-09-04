@@ -1,7 +1,6 @@
 
 import React, { useContext, useState } from 'react'
 import { toast } from 'react-hot-toast'
-import axios from 'axios'
 import { useNavigate } from 'react-router-dom'
 import { AuthContext } from '../Context/Auth.Context'
 import SellerProtected from '../Comman/SellerProtected'
