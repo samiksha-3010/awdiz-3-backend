@@ -6,7 +6,8 @@ import api from '../ApiConfig';
 import { toast } from 'react-hot-toast';
 import { AuthContext } from '../Context/Auth.Context';
 
-const  SingleProduct = () => {
+
+const SingleProduct  = () => {
     const [singleProductData, setSingleProductData] = useState({});
     const { id } = useParams();
 
@@ -41,6 +42,8 @@ const  SingleProduct = () => {
             toast.error("Internal server error, please try again...")
         }
     }
+
+
     return (
         <div>
             {singleProductData?.name ? <div style={{ display: 'flex', justifyContent: 'space-around' }}>
@@ -55,8 +58,9 @@ const  SingleProduct = () => {
                     <button onClick={() => addToCart(singleProductData._id)}>Add to cart</button>
                 </div>
 
-            </div> : <div>Loading..</div>}
+            </div> : <div>Loading....</div>}
         </div>
     )
 }
+
 export default SingleProduct

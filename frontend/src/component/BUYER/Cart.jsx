@@ -1,13 +1,3 @@
-// import React from 'react'
-
-// const Cart = () => {
-//   return (
-//     <div>Cart</div>
-//   )
-// }
-
-// export default Cart
-
 import React, { useContext, useEffect, useState } from 'react'
 import api from '../ApiConfig';
 import { AuthContext } from '../Context/Auth.Context';

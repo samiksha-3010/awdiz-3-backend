@@ -10,9 +10,11 @@ import Login from './component/Login';
 import AddProduct from './component/Seller/AddProduct';
 import Navbar from './component/Comman/Navbar';
 import Profile from './component/Profile';
-import SingleProduct from './component/BUYER/SingleProduct';
 import YourProducts from './component/Seller/YourProducts';
+import SingleProduct from './component/Buyer/SingleProduct';
 import Cart from './component/Buyer/Cart';
+
+
 
 
 
@@ -31,15 +33,10 @@ function App() {
      <Route path='/add-product' element={<AddProduct />} />
      <Route path='/profile' element={<Profile/>} />
      <Route path='/singleproduct/:id' element={<SingleProduct/>}/>
-     <Route path='/cart' element={<Cart/>}/>
      <Route path='/your-product' element={<YourProducts/>}/>
-
-
-
-     
-
-
-
+     <Route path='/cart' element={<Cart/>}/>
+   
+  
      </Routes>
        
     </div>

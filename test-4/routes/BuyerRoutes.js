@@ -2,6 +2,8 @@ import express from 'express';
 import { addComments, addRating, allCartProducts, getSingleProductData } from '../controllers/product.Controolers.js';
 import { addCart, addWishlist, getCartProducts, getWishlistProducts, removeCartProduct } from '../controllers/Buyer.controller.js';
 import { isValidUser } from '../Meedleware/All.Meedleware.js';
+// import Cart from '../../frontend/src/component/BUYER/Cart.jsx';
+;
 
 
 const router = express.Router();
@@ -17,7 +19,8 @@ router.delete("/remove-cart-product", removeCartProduct)
 
 
 router.post("/get-single-product-data", getSingleProductData)
-router.post('/all-cart-products', allCartProducts)  
+router.post('/all-cart-products', allCartProducts) 
+// router.post('/cart', Cart)   
 
 
 export default router;
