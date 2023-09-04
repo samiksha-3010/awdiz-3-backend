@@ -1,10 +1,9 @@
 import React, { useContext, useEffect, useState } from 'react'
 import { toast } from 'react-hot-toast'
-import axios from 'axios'
 import { useNavigate } from 'react-router-dom'
-import "./All css/Register.css"
+import "./all-css/Register.css"
 import { AuthContext } from './Context/Auth.Context'
-import api from './ApiConfig'
+import api from './apiConfig/index'
 
 const Register = () => {
     const {state} =useContext(AuthContext)

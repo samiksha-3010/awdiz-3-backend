@@ -1,10 +1,9 @@
 import React, { useContext, useEffect, useState } from 'react'
 import { toast } from 'react-hot-toast'
-import axios from 'axios'
 import { useNavigate } from 'react-router-dom'
-import "./All css/Login.css"
+import "./all-css/Login.css"
 import { AuthContext } from './Context/Auth.Context'
-import api from './ApiConfig/index';
+import api from './apiConfig/index';
 
 
 const Login = () => {

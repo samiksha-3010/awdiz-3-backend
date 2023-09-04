@@ -5,9 +5,9 @@ import { checkSeller } from '../Meedleware/All.Meedleware.js';
 
 const router = express.Router();
 
-router.post('/add-product', checkSeller, addProduct)
-router.post("/get-your-products", checkSeller, getYourProducts)
-router.patch("/update-your-product", checkSeller, updateYourProduct)
-router.delete("/delete-your-product", checkSeller, deleteYourProduct)
+router.post('/add-product',addProduct)
+router.post("/get-your-products",getYourProducts)
+router.patch("/update-your-product",updateYourProduct)
+router.delete("/delete-your-product",deleteYourProduct)
 
 export default router;

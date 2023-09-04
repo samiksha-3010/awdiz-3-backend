@@ -8,9 +8,10 @@ import routesIndex from './routes/index.js'
 
 const app = express();
 app.use(express.json());
-dotenv.config();
 app.use(cors())
 app.use(morgan("dev"))
+dotenv.config();
+
 
 app.get("/",(req,res) => {
   res.send("working..")

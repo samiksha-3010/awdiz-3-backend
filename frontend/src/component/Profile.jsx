@@ -1,9 +1,8 @@
 import React, { useContext, useEffect, useState } from 'react'
 import { AuthContext } from './Context/Auth.Context'
 import toast from 'react-hot-toast'
-import AuthProtected from './Comman/AuthProtected'
-import axios from 'axios'
-import api from './ApiConfig'
+import AuthProtected from './common/AuthProtected'
+import api from './apiConfig/index'
 
 const Profile = () => {
     const [number, setNumber] = useState()
