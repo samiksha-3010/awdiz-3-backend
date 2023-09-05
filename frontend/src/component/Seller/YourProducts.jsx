@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import api from "../apiConfig/index";
 // import { toast } from "react-hot-toast";
-// import { response } from "express";
+
 
 const YourProducts = () => {
   const [allProducts, setAllProducts] = useState();
@@ -20,7 +20,7 @@ const YourProducts = () => {
     getProducts();
   }, []);
   return (
-    <div>
+    <div className="product-style">
       <h1>Your Products Here ...</h1>
 
       {allProducts?.length ? (

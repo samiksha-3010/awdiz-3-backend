@@ -8,6 +8,8 @@ import { AuthContext } from '../Context/Auth.Context';
 const SingleProduct  = () => {
     const [singleProductData, setSingleProductData] = useState({});
     const { id } = useParams();
+    
+    //  console.log(singleProductData)
 
     const { state } = useContext(AuthContext)
 
@@ -32,7 +34,7 @@ const SingleProduct  = () => {
 
     async function addToCart(productId) {
         try {
-            const response = await api.post('/all/add-cart', { productId, userId: state?.user?._id });
+            const response = await api.post('/buyer/add-cart', { productId, userId: state?.user?._id });
             if (response.data.success) {
                 toast.success("Product added successfully to cart.")
             }

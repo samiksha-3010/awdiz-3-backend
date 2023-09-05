@@ -29,7 +29,7 @@ const Cart = () => {
     // console.log(cartProducts, "cartProducts here")
 
     return (
-        <div>Cart</div>
+        <div>Cart Products here...</div>
     )
 }
 

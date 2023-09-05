@@ -7,6 +7,8 @@ const Allproducts = () => {
   const [products, setProducts] = useState();
   const router = useNavigate();
 
+  // console.log(products)
+
   useEffect(() => {
     async function getProducts() {
       try {
@@ -36,7 +38,7 @@ const Allproducts = () => {
           >
             {products.map((pro) => (
               <div
-                onClick={() => router(`/single-products/${pro._id}`)}
+                onClick={() => router(`/singleproduct/${pro._id}`)}
                 style={{
                   width: "23%",
                   height: "450px",

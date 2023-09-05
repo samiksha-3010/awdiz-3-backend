@@ -20,7 +20,8 @@ router.delete("/remove-cart-product", removeCartProduct)
 
 router.post("/get-single-product-data", getSingleProductData)
 router.post('/all-cart-products', allCartProducts) 
-// router.post('/cart', Cart) 
+router.post('add-cart/', addCart) 
+
 
 
 
