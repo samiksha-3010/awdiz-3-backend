@@ -11,6 +11,8 @@ const Profile = () => {
     const [isOtpSent,setIsOtpSent] = useState(false)
     const {state} = useContext(AuthContext)
 
+    console.log(state)
+
     const sendOtp = async () => {
         const response = await api.post('/all/send-otp', { userId: state?.user?._id });
         if (response.data.success) {
