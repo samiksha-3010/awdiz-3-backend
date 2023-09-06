@@ -11,7 +11,7 @@ router.post('/get-current-user', getCurrentUser)
 router.post("/get-number", getNumber)
 router.get("/all-products", allProducts);
 router.post("/send-otp", sendOtp)
-router.post("/verify-otp", verifyOtp)
+router.post("/verify-otp", verifyOtp) 
 
 
 
