@@ -1,6 +1,6 @@
 import React,{useContext, useEffect, useState} from 'react'
 import { AuthContext } from './Context/Auth.Context';
-import Allproducts from './common/Allproducts';
+// import Allproducts from './common/Allproducts';
 import api from './apiConfig';
 
 const Home = () => {
@@ -11,7 +11,8 @@ const Home = () => {
       try {
       
         const response = await api.get("/all/all-products");
-        if (response.data.success) {
+          // if (response.data.success)
+        if (response.status === 200) {
           setAllProducts(response.data.products);
         }
       } catch (error) {
@@ -25,7 +26,7 @@ const Home = () => {
 
   return (
     <div className="product-style">
-      <div>Home Page{state?.user?.name}</div>
+      <div><h2></h2>{state?.user?.name}</div>
  
 
       {allProducts?.length ? (

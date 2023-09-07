@@ -206,6 +206,43 @@ export const verifyOtp = async (req, res) => {
 
 
 
+export const checkOut = async (req, res) => {
+  try {
+    
+    const { token } = req.body;
+  
+    if (!token)
+      return res
+        .status(404)
+        .json({ success: false, message: "Token is required" });
+  
+        const decoededData = jwt.verify(token, process.env.JWT_SECRET);
+    
+        // console.log(decoededData, "decoededData")
+  
+        if (!decoededData) {
+          return res
+            .status(404)
+            .json({ success: false, message: "Not valid json token.." });
+        }
+        // return res.send(decoededData)
+    
+        const newuserid = decoededData?.userId;
+  
+    const user = await User.findByIdAndUpdate(newuserid,{cart:[]});
+    
+      return res.status(200).json({
+        success: true,
+        message: " Your products will deliver soon...", user
+      })
+    
+  } catch (error) {
+    
+    return res.status(500).json({ success: false, message: error.message });
+  }
+  };
+
+
 
 
 

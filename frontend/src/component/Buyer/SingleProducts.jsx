@@ -3,6 +3,7 @@ import { useParams } from 'react-router-dom'
 import api from '../apiConfig/index';
 import { toast } from 'react-hot-toast';
 import { AuthContext } from '../Context/Auth.Context';
+import axios from 'axios';
 
 
 const SingleProduct  = () => {
@@ -30,19 +31,23 @@ const SingleProduct  = () => {
         }
     }, [id])
 
-    console.log(singleProductData, "singleProductData")
+    // console.log(singleProductData, "singleProductData")
 
     async function addToCart(productId) {
+        console.log(productId, "singleProductData")
         try {
-            const response = await api.post('/buyer/add-cart', { productId, userId: state?.user?._id });
+            const response = await api.post('/buyer/add-to-cart', { productId, userId: state?.user?._id });
+            console.log(response.data,"gfdfdf")
             if (response.data.success) {
+                console.log(response.data.success,"gfdfdbnnvvf")
+                setSingleProductData(response.data.products)
+               
                 toast.success("Product added successfully to cart.")
             }
         } catch (error) {
             toast.error("Internal server error, please try again...")
         }
     }
-
 
     return (
         <div>

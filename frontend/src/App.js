@@ -11,7 +11,7 @@ import SingleProduct from "./component/Buyer/SingleProducts";
 import YourProducts from "./component/Seller/YourProducts";
 import Cart from "./component/Buyer/Cart";
 import Navbar from "./component/common/Navbar"
-// import Allproducts from "./component/common/Allproducts";
+import Allproducts from "./component/common/Allproducts";
 
 function App() {
   return (
@@ -26,7 +26,7 @@ function App() {
      <Route exact path='/singleproduct/:id' element={<SingleProduct/>}/>
      <Route exact path='/your-product' element={<YourProducts/>}/>
      <Route exact path='/add-cart' element={<Cart/>}/> 
-     {/* <Route exact path='/all-products' element={<Allproducts/>}/>   */}
+     <Route exact path='/all-products' element={<Allproducts/>}/>  
       </Routes>
     </div>
   );
