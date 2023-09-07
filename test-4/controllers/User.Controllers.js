@@ -3,8 +3,6 @@ import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
 import { sendTwilioMessage } from "../Helper/Sms.js";
 
-
- 
 export const Register = async (req, res) => {
   // console.log(req.headers, "headers")
   try {
@@ -52,7 +50,7 @@ export const Login = async (req, res) => {
     const user = await User.findOne({ email: email });
     if (!user)
       return res.json({ success : false, message: "User not found.." });
-`z1q1 `
+
     const isPasswordRight = await bcrypt.compare(password, user.password);
     // console.log(isPasswordRight, "isPasswordRight");
     if (isPasswordRight) {
@@ -104,7 +102,6 @@ export const getCurrentUser = async (req, res) => {
 
       // return res.status(404).json({ status: "error", message: "error" })
     }
-
     const userObeject = {
       name: user?.name,
       email: user?.email,
@@ -142,7 +139,7 @@ export const sendOtp = async (req, res) => {
       const userNumber = await User.findById(userId);
 
       const otp = "301002" 
-      const message = `Hi, Your Awdiz mobile verification otp is - ${otp}`
+      const message = `Hi, Your  mobile verification otp is - ${otp}`
       if (userNumber) {
 
           const responseFromTwilio = sendTwilioMessage(userNumber.number, message)
