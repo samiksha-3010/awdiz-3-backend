@@ -60,7 +60,7 @@ const SingleProduct  = () => {
                     <h1>{singleProductData.name}</h1>
                     <h3>Price : {singleProductData.price}</h3>
                     <h3>Category : {singleProductData.category}</h3>
-                    <button onClick={() => addToCart(singleProductData._id)}>Add to cart</button>
+                    <button onClick={() => addToCart(singleProductData._id)}  style={{width:"20%",height:"40px",backgroundColor:"red"}}>Add to cart</button>
                 </div>
 
             </div> : <div>Loading....</div>}
