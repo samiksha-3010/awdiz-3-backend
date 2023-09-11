@@ -215,14 +215,14 @@ export const checkOut = async (req, res) => {
   
         const decoededData = jwt.verify(token, process.env.JWT_SECRET);
     
-        // console.log(decoededData, "decoededData")
+          // console.log(decoededData, "decoededData")
   
         if (!decoededData) {
           return res
             .status(404)
             .json({ success: false, message: "Not valid json token.." });
         }
-        // return res.send(decoededData)
+        //  return res.send(decoededData)
     
         const newuserid = decoededData?.userId;
   

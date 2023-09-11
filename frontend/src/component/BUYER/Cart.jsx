@@ -38,7 +38,7 @@ const Cart = () => {
     const token = JSON.parse(localStorage.getItem("token"));
     console.log(token,"token here")
       if (token) {
-        console.log(token,"token here")
+        // console.log(token,"token here")
       try {
         const response = await api.post("/checkOut", {token});
         // console.log(response.data.success,"response here");
