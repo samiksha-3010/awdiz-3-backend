@@ -6,6 +6,7 @@ import { useNavigate } from "react-router-dom";
 const Allproducts = () => {
   const [products, setProducts] = useState();
   const router = useNavigate();
+  
 
 
   useEffect(() => {
