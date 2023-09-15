@@ -5,7 +5,13 @@ import { useNavigate } from "react-router-dom";
 
 const Allproducts = () => {
   const [products, setProducts] = useState();
+  // const [Records, setRecords] = useState([])
   const router = useNavigate();
+  
+
+  // const filter = (event)=>{
+  //   setRecords(products.filter(f=>f.name.toLowerCase().includes(event.target.value)))
+  // }
   
 
 
@@ -32,6 +38,7 @@ const Allproducts = () => {
 
   return (
     <div>
+      {/* <input type="text" placeholder="search" onChange={filter}/> */}
       <h1>All Products</h1>
       <div>
         {products?.length ? (
