@@ -5,14 +5,17 @@ import { useNavigate } from "react-router-dom";
 
 const Allproducts = () => {
   const [products, setProducts] = useState();
-  // const [Records, setRecords] = useState([])
+  const [page, setPage] = useState(1)
   const router = useNavigate();
   
 
-  // const filter = (event)=>{
-  //   setRecords(products.filter(f=>f.name.toLowerCase().includes(event.target.value)))
-  // }
   
+  // const selectPageHandler = (selectedPage) => {
+  //   if (selectedPage >= 1 && selectedPage <= products.length / 10 && selectedPage !== page) {
+  //     setPage(selectedPage)
+  //   }
+  // }
+
 
 
   useEffect(() => {
@@ -38,7 +41,7 @@ const Allproducts = () => {
 
   return (
     <div>
-      {/* <input type="text" placeholder="search" onChange={filter}/> */}
+    
       <h1>All Products</h1>
       <div>
         {products?.length ? (
@@ -72,6 +75,20 @@ const Allproducts = () => {
         ) : (
           <div>Loading!!..</div>
         )}
+
+        {/* pagination */}
+
+{/* {products.length > 0 && <div className="pagination">
+        <span onClick={() => selectPageHandler(page - 1)} className={page > 1 ? "" : "pagination__disable"}>◀</span>
+
+        {[...Array(products.length / 10)].map((_, i) => {
+          return <span key={i} className={page === i + 1 ? "pagination__selected" : ""} onClick={() => selectPageHandler(i + 1)}>{i + 1}</span>
+        })}
+
+        <span onClick={() => selectPageHandler(page + 1)} className={page < products.length / 10 ? "" : "pagination__disable"}>▶</span>
+      </div>} */}
+
+
       </div>
     </div>
   );
