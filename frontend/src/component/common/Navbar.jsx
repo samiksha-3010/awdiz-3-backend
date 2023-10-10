@@ -6,7 +6,7 @@ const Navbar = () => {
     const router = useNavigate()
     const {state, dispatch} = useContext(AuthContext);
   return (
-    <div style={{border:"1px solid black",display:"flex",justifyContent:"space-around",height:"70px"}}>
+    <div style={{border:"1px solid black",display:"flex",justifyContent:"space-around",height:"70px",backgroundColor:"lightblue" , alignItems:"center"}}>
         <div  style={{ width: "50%", display: 'flex', justifyContent: 'space-around' }}> 
             <h4 onClick={() => router('/all-products')}>Logo</h4>
             {state?.user?.role != "Seller" && <h4>Mens</h4>}

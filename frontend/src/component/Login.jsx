@@ -28,7 +28,7 @@ const Login = () => {
                 })
                 localStorage.setItem("token", JSON.stringify(response.data.token))
                 setUserData({ email: "", password: "" })
-                router('/')
+                router('/all-products')
                 toast.success(response.data.message)
                
             } else {
@@ -56,7 +56,7 @@ const Login = () => {
                 <input  className='input-email' type='password' onChange={handleChange} name='password' value={userData.password} /><br />
                 <input  className='submit' type='submit' value='Login' /><br />
             </form>
-            <button  className='submit' onClick={() => router('/register')}>Register</button>
+            {/* <button  className='submit' onClick={() => router('/register')}>Register</button> */}
             <p style={{color:"red"}}  onClick={() => router('/register')}>New Register</p>
         </div>
     )

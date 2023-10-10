@@ -1,5 +1,5 @@
 import React, { useContext, useEffect, useState } from 'react'
-import { useParams } from 'react-router-dom'
+import { Router, useNavigate, useParams } from 'react-router-dom'
 import api from '../apiConfig/index';
 import { toast } from 'react-hot-toast';
 import { AuthContext } from '../Context/Auth.Context';
@@ -9,6 +9,7 @@ import axios from 'axios';
 const SingleProduct  = () => {
     const [singleProductData, setSingleProductData] = useState({});
     const { id } = useParams();
+    const Router = useNavigate()
     
     //  console.log(singleProductData)
 
@@ -43,6 +44,7 @@ const SingleProduct  = () => {
                 setSingleProductData(response.data.products)
                
                 toast.success("Product added successfully to cart.")
+                Router("/add-cart")
             }
         } catch (error) {
             toast.error("Internal server error, please try again...")

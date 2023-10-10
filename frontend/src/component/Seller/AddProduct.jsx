@@ -41,16 +41,16 @@ const AddProduct = () => {
             <h1>Add Product</h1>
             <form onSubmit={handleSubmit}>
                 <label>Name</label><br />
-                <input type='text' onChange={handleChange} name='name' value={productData.name} /><br />
+                <input style={{width:"30%" , height:"60px"}} type='text' onChange={handleChange} name='name' value={productData.name} /><br />
                 <label>Price</label><br />
-                <input type='number' onChange={handleChange} name='price' value={productData.price} /><br />
+                <input  style={{width:"30%" , height:"60px"}} type='number' onChange={handleChange} name='price' value={productData.price} /><br />
                 <label>Image</label><br />
-                <input type='text' onChange={handleChange} name='image' value={productData.image} /><br />
+                <input   style={{width:"30%" , height:"60px"}}type='text' onChange={handleChange} name='image' value={productData.image} /><br />
                 <label>Category</label><br />
-                <input type='text' onChange={handleChange} name='category' value={productData.category} /><br />
-                <input type='submit' value='Add Product' /><br />
+                <input style={{width:"30%" , height:"60px"}} type='text' onChange={handleChange} name='category' value={productData.category} /><br />
+                <input  style={{width:"20%" , height:"60px",backgroundColor:"black",color:"white",marginTop:"10px" ,marginLeft:"50px",borderRadius:"30px"}} type='submit' value='Add Product' /><br />
             </form>
-            <button onClick={() => router('/your-products')}>All Products</button>
+            {/* <button onClick={() => router('/your-products')}>All Products</button> */}
         </SellerProtected>
     )
 }

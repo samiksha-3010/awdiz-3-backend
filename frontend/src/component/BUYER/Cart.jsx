@@ -2,6 +2,8 @@ import React, { useContext, useEffect, useState } from 'react'
 import api from '../apiConfig/index';
 import { AuthContext } from '../Context/Auth.Context';
 import { toast } from 'react-hot-toast';
+// import router from '../../../../test-4/routes/BuyerRoutes';
+import { useNavigate } from 'react-router-dom';
 
 
 const Cart = () => {
@@ -9,6 +11,7 @@ const Cart = () => {
     const [cartProducts, setCartProducts] = useState([]);
     // console.log(cartProducts,"all data here");
     const { state } = useContext(AuthContext)
+    const router = useNavigate()
 
     // console.log(state,"state")
 
@@ -34,28 +37,36 @@ const Cart = () => {
     
   console.log(cartProducts, "cartProducts here");
 
-  const checkOut = async () => {
-    const token = JSON.parse(localStorage.getItem("token"));
-    console.log(token,"token here")
-      if (token) {
-        // console.log(token,"token here")
-      try {
-        const response = await api.post("/checkOut", {token});
-        // console.log(response.data.success,"response here");
-        if (response.data.success) {
-          toast.success(response.data.message);
-          setCartProducts([]);
-        } else {
-          toast.error(response.data.message);
-        }
-      } catch (error) {
-        toast.error(error.message);
-      }
-    }
-  };
+//   const checkOut = async () => {
+//     const token = JSON.parse(localStorage.getItem("token"));
+//     // console.log(token,"token here")
+//       if (token) {
+//         // console.log(token,"token here")
+//       try {
+//         const response = await api.post("/checkout", {token});
+//         // console.log(response.data.success,"response here");
+//         if (response.data.success) {
+//           toast.success(response.data.message);
+//           setCartProducts([]);
+//         } else {
+//           toast.error(response.data.message);
+//         }
+//       } catch (error) {
+//         toast.error(error.message);
+//       }
+//     }
+  
+// };
+
+const checkOut = () => {
+  router("/all-products")
+  toast.success("product will deliverd soon")
+  // cartProducts([])
+
+}
 
   useEffect(() => {
-    if (cartProducts.length) {
+    if (cartProducts?.length) {
       var totalprice = 0;
       for (var i = 0; i < cartProducts.length; i++) {
         totalprice += cartProducts[i].price;

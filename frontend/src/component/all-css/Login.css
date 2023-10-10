@@ -5,9 +5,13 @@
 }
 .body-first{
     border: 1px solid black;
+    display: grid;
+   text-align: center;
     width: 30%;
-    height: 400px;
+    /* height: 400px; */
     margin: auto;
+    padding-bottom: 2%;
+   margin-top: 2%;
 }
 .email{
     border: 1px solid black;
