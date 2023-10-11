@@ -215,7 +215,7 @@ export const checkOut = async (req, res) => {
   
         const decoededData = jwt.verify(token, process.env.JWT_SECRET);
     
-          // console.log(decoededData, "decoededData")
+           console.log(decoededData, "decoededData")
   
         if (!decoededData) {
           return res
