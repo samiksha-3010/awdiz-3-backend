@@ -5,6 +5,7 @@ import { toast } from 'react-hot-toast';
 import { useNavigate } from 'react-router-dom';
 
 
+
 const Cart = () => {
     const [finalprice, setFinalPrice] = useState(0);
     const [cartProducts, setCartProducts] = useState([]);
@@ -71,6 +72,10 @@ const Cart = () => {
     }
   }, [cartProducts]);
 
+  // const handleDelite = async(()=>{
+  //   const response = await api.delete("/buyer/all-cart-products'")
+  // })
+
     return (
         <div
         style={{
@@ -117,6 +122,7 @@ const Cart = () => {
                     padding: "8px 30px",
                     borderRadius: "15px",
                   }}
+                  // onClick={handleDelite }
                 >
                   {" "}
                   Remove
