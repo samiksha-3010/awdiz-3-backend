@@ -16,7 +16,7 @@ export const addWishlist = async (req, res) => {
         await user.save();
 
         return res.status(200).json({ success: true, user: user })
-
+            
     } catch (error) {
         return res.status(500).json({ status: "error", message: error })
     }
@@ -79,7 +79,7 @@ import User from "../modal/User.js";
 import jwt from "jsonwebtoken";
 
 export const addCart = async (req, res) => {
-    try {
+    try { 
         const { token, productId } = req.body;
         if (!token || !productId) throw new Error("Token and product id is requir.")
 

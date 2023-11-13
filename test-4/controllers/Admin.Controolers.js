@@ -91,7 +91,7 @@ if (!decodedData) {
 
 const userId = decodedData.userId;
 
-const user = await UserModal.findById(userId);
+const user = await User.findById(userId);
 
 if (!user) {
     return res.status(404).json({ message: "User not valid.", status: "error" })
@@ -213,9 +213,13 @@ export const getverifiedProducts  =async (res,req)=>{
         if(!verifiedProducts.length) {
           return  res.status(404).json({success:false,message:"No Verified Products"})
         }
+        return res.status(200).json({ success: "true", product:getverifiedProducts})
+
+        
     }catch (error){
         res.status(500).json({success: false,message:error})
     }
+
 }
     
 
@@ -265,7 +269,7 @@ export const  getBlockedProducts =async (req,res) =>{
     if(!blockedProducts.length){
         res.status(200).json({ success:false,message:"No Unblocked Product.."})
     }
-
+ 
     return res.status(200).json({ success: "true", product:blockedProducts})
 
    

@@ -140,8 +140,7 @@ export const sendOtp = async (req, res) => {
 
       const otp = "301002" 
       const message = `Hi, Your  mobile verification otp is - ${otp}`
-      if (userNumber) {
-
+      if (userNumber) { 
           const responseFromTwilio = sendTwilioMessage(userNumber.number, message)
           console.log(responseFromTwilio, "responseFromTwilio")
           if (responseFromTwilio) {
@@ -187,7 +186,7 @@ export const verifyOtp = async (req, res) => {
           success: true,
           isNumberVerified: user.isNumberVerified,
           message: "OTP verified successfully!",
-        });
+        }); 
       }
       return res
         .status(404)
@@ -215,7 +214,7 @@ export const checkOut = async (req, res) => {
   
         const decoededData = jwt.verify(token, process.env.JWT_SECRET);
     
-           console.log(decoededData, "decoededData")
+          //  console.log(decoededData, "decoededData")
   
         if (!decoededData) {
           return res
