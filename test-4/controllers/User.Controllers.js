@@ -204,7 +204,6 @@ export const verifyOtp = async (req, res) => {
 
 export const checkOut = async (req, res) => {
   try {
-    
     const { token } = req.body;
   
     if (!token)

@@ -139,11 +139,11 @@ const Home = () => {
   const indexOfFirstProduct = indexOfLastProduct - productsPerPage;
 
 
-  const filteredProducts = allProducts.filter((product) =>
+  const filteredProducts = allProducts?.filter((product) =>
     product.name.toLowerCase().includes(searchTerm.toLowerCase())
   );
 
-  const currentProducts = filteredProducts.slice(indexOfFirstProduct, indexOfLastProduct);
+  const currentProducts = filteredProducts?.slice(indexOfFirstProduct, indexOfLastProduct);
 
   const paginate = (pageNumber) => {
     setCurrentPage(pageNumber);
@@ -168,7 +168,7 @@ const Home = () => {
 
   return (
     <div>
-      <div><h2>Welcome User</h2>: {state?.user?.name}</div>
+      <div style={{ textAlign: "center" }}><h2>Welcome User</h2>: {state?.user?.name}</div>
       <div >
         <h2>All products</h2>
 
@@ -183,11 +183,15 @@ const Home = () => {
         </div>
 
         {currentProducts.length ? (
-          <div>
+          <div style={{ display: "flex", justifyContent: "space-around" }}>  {" "}
             {currentProducts.map((product) => (
-              <div onClick={() => router(`/single-products/${product._id}`)} key={product._id}>
+              <div onClick={() => router(`/single-products/${product._id}`)} key={product._id}   style={{
+                border: "2px solid grey",
+                width: "230px",
+                height: "400px",
+              }}>
                 <div >
-                  <img src={product.image} alt={product.name} />
+                  <img src={product.image} alt={product.name}  style={{ width: "100%", height: "73%" }} />
                 </div>
                 <p>{product.name}</p>
                 <p>{product.price} $</p>

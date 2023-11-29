@@ -41,7 +41,7 @@ const Cart = () => {
       if (token) {
       try {
         const response = await api.post("/checkout", {token});
-        // console.log(response.data.success,"response here");
+         console.log(response.data.success,"response here");
         if (response.data.success) {
           toast.success(response.data.message);
           setCartProducts([]);
@@ -53,7 +53,7 @@ const Cart = () => {
         toast.error(error.message);
       }
     }
-  
+
 };
 
 // const checkOut = () => {
