@@ -17,8 +17,6 @@ app.get("/",(req,res) => {
   res.send("working..")
 })
 
-
-
 app.use('/api/v1', routesIndex)
 
 mongoose.connect(process.env.Mongo_URL).then(() =>{
